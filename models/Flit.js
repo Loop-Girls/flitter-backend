@@ -5,7 +5,7 @@ const User = require('./User')
 const Comment = require('./Comment')
 
 // define flips schema
-const flipsSchema = mongoose.Schema({
+const flitsSchema = mongoose.Schema({
   author: { type: String, index: true, required: true },
   image: { type: String, index: true },
   message: { type: String, index: true },
@@ -14,7 +14,7 @@ const flipsSchema = mongoose.Schema({
   comments: { type: [Comment.schema], index: true },
 });
 
-flipsSchema.statics.lista = function (filtro, skip, limit, campos, sort) {
+flitsSchema.statics.lista = function (filtro, skip, limit, campos, sort) {
   const query = Ads.find(filtro); // this does only return the query not executed
   query.skip(skip);
   query.limit(limit);
@@ -25,7 +25,7 @@ flipsSchema.statics.lista = function (filtro, skip, limit, campos, sort) {
 
 
 // Create the model
-const Flips = mongoose.model('Flips', flipsSchema);
+const Flits = mongoose.model('Flips', flipsSchema);
 
 // Export the model
-module.exports = Flips;
+module.exports = Flits;
