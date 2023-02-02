@@ -64,7 +64,7 @@ router.get('/', async (req, res, next) => {
             filtro.image = image.toLocaleLowerCase();
         }
 
-
+        //TODO: maybe
         //   if (tag) {// /apiv1/ads?tags=lifestyle,work
         //     if (tag.includes(',')) {
         //       filtro.tags = { '$all': tag.split(',') }
@@ -74,27 +74,27 @@ router.get('/', async (req, res, next) => {
 
         //   }
         // /apiv1/flits?kudos=1000
-        if (kudos) {
-            if (kudos.includes('-')) {
-                if (kudos.charAt(0) === '-') {// /apiv1/flits?kudos=-50 Search for product less or equal than 50
-                    const maxKudos = kudos.slice(1);
-                    filtro.kudos= { '$lte': maxKudos };
-                    console.log(maxKudos);
-                } else if (kudos.slice(-1) === '-') {  // /apiv1/flits?kudos=10- Search for product greater or equal than 10
-                    const minKudo = kudos.split('-');
-                    filtro.kudos = { '$gte': (minKudo[0]) };
-                } else {
-                    // /apiv1/flits?price=0-50 Search for product between 0-50 price
-                    const minMaxArray = kudos.split('-');
-                    const min = minMaxArray[0];
-                    const max = minMaxArray[1];
-                    filtro.kudos = { '$gte': min, '$lte': max };
-                }
+        // if (kudos) {
+        //     if (kudos.includes('-')) {
+        //         if (kudos.charAt(0) === '-') {// /apiv1/flits?kudos=-50 Search for product less or equal than 50
+        //             const maxKudos = kudos.slice(1);
+        //             filtro.kudos= { '$lte': maxKudos };
+        //             console.log(maxKudos);
+        //         } else if (kudos.slice(-1) === '-') {  // /apiv1/flits?kudos=10- Search for product greater or equal than 10
+        //             const minKudo = kudos.split('-');
+        //             filtro.kudos = { '$gte': (minKudo[0]) };
+        //         } else {
+        //             // /apiv1/flits?price=0-50 Search for product between 0-50 price
+        //             const minMaxArray = kudos.split('-');
+        //             const min = minMaxArray[0];
+        //             const max = minMaxArray[1];
+        //             filtro.kudos = { '$gte': min, '$lte': max };
+        //         }
 
-            } else {// /apiv1/flits?kudo=32
-                filtro.kudos = kudos;
-            }
-        }
+        //     } else {// /apiv1/flits?kudo=32
+        //         filtro.kudos = kudos;
+        //     }
+        // }
 
 
         const flits = await Flit.lista(filtro, skip, limit, fields, sort);
