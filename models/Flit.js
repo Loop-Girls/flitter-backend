@@ -25,7 +25,7 @@ flitsSchema.statics.lista = function (filtro, skip, limit, campos, sort) {
 
 
 // Create the model
-const Flits = mongoose.model('Flips', flipsSchema);
+const Flits = mongoose.model('Flits', flipsSchema);
 
 // Export the model
 module.exports = Flits;

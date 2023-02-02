@@ -8,11 +8,11 @@ const commentsSchema = mongoose.Schema({
     author:   {type: String, index: true, required: true} ,
     image:    {type: String, index: true} ,
     message:   {type: String, index: true},
-    kudos:    {type: Number, index: true},
+    kudos:    {type: [User.schema], index: true},
 });
 
 commentsSchema.statics.lista = function (filtro, skip, limit, campos, sort) {
-  const query = Ads.find(filtro); // this does only return the query not executed
+  const query = Comments.find(filtro); // this does only return the query not executed
   query.skip(skip);
   query.limit(limit);
   query.select(campos);

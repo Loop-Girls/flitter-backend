@@ -9,7 +9,7 @@ const followersSchema = mongoose.Schema({
 });
 
 followersSchema.statics.lista = function (filtro, skip, limit, campos, sort) {
-  const query = Ads.find(filtro); // this does only return the query not executed
+  const query = Followers.find(filtro); // this does only return the query not executed
   query.skip(skip);
   query.limit(limit);
   query.select(campos);
