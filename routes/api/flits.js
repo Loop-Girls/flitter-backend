@@ -9,20 +9,20 @@ const router = express.Router();
 
 // CRUD
 
-// POST /apiv1/flips(body=adData)
-// Create a flip
-router.post('/apiv1/flips', async (req, res, next) => {
+// POST /apiv1/flits(body=adData)
+// Create a flit
+router.post('/apiv1/flits', async (req, res, next) => {
     try {
 
         const adData = req.body;
 
         // instanciate new ad in the memory
-        const flip = new Flip(adData);
+        const flit = new Flit(adData);
 
         // save it in de database
-        const savedFlip = await flip.save();
+        const savedFlit = await flit.save();
 
-        res.json({ result: savedFlip });
+        res.json({ result: savedFlit });
         // }
 
 
@@ -31,8 +31,8 @@ router.post('/apiv1/flips', async (req, res, next) => {
     }
 });
 
-// GET /apiv1/flips
-// Returns list of flips
+// GET /apiv1/flits
+// Returns list of flits
 router.get('/', async (req, res, next) => {
     try {
 
@@ -41,13 +41,13 @@ router.get('/', async (req, res, next) => {
         const image = req.query.image;
         const message = req.query.message;
         const kudos = req.query.kudos.length;
-        // pagination /apiv1/flips?skip=1&limit=1
+        // pagination /apiv1/flits?skip=1&limit=1
         const skip = req.query.skip;
         const limit = req.query.limit;
         // fields selection
-        const fields = req.query.fields; // /apiv1/flips?fields=name -_id
+        const fields = req.query.fields; // /apiv1/flits?fields=name -_id
         // sort
-        const sort = req.query.sort; // /apiv1/flips?sort=date%20name
+        const sort = req.query.sort; // /apiv1/flits?sort=date%20name
 
         const filtro = {};
 
@@ -60,7 +60,7 @@ router.get('/', async (req, res, next) => {
             filtro.message = new RegExp('^' + req.query.message, "i");;
         }
        
-        if (image) {// /apiv1/flips?image=false
+        if (image) {// /apiv1/flits?image=false
             filtro.image = image.toLocaleLowerCase();
         }
 
@@ -73,48 +73,48 @@ router.get('/', async (req, res, next) => {
         //     }
 
         //   }
-        // /apiv1/flips?kudos=1000
+        // /apiv1/flits?kudos=1000
         if (kudos) {
             if (kudos.includes('-')) {
-                if (kudos.charAt(0) === '-') {// /apiv1/flips?kudos=-50 Search for product less or equal than 50
+                if (kudos.charAt(0) === '-') {// /apiv1/flits?kudos=-50 Search for product less or equal than 50
                     const maxKudos = kudos.slice(1);
                     filtro.kudos= { '$lte': maxKudos };
                     console.log(maxKudos);
-                } else if (kudos.slice(-1) === '-') {  // /apiv1/flips?kudos=10- Search for product greater or equal than 10
+                } else if (kudos.slice(-1) === '-') {  // /apiv1/flits?kudos=10- Search for product greater or equal than 10
                     const minKudo = kudos.split('-');
                     filtro.kudos = { '$gte': (minKudo[0]) };
                 } else {
-                    // /apiv1/ads?price=0-50 Search for product between 0-50 price
+                    // /apiv1/flits?price=0-50 Search for product between 0-50 price
                     const minMaxArray = kudos.split('-');
                     const min = minMaxArray[0];
                     const max = minMaxArray[1];
                     filtro.kudos = { '$gte': min, '$lte': max };
                 }
 
-            } else {// /apiv1/flips?kudo=32
+            } else {// /apiv1/flits?kudo=32
                 filtro.kudos = kudos;
             }
         }
 
 
-        const flips = await Flip.lista(filtro, skip, limit, fields, sort);
-        res.json({ results: flips });
+        const flits = await Flit.lista(filtro, skip, limit, fields, sort);
+        res.json({ results: flits });
     } catch (err) {
         next(err);
     }
 });
 
-// GET /apiv1/flips/(id)
-// Returns a flip
+// GET /apiv1/flits/(id)
+// Returns a flit
 router.get('/:id', async (req, res, next) => {
     try {
 
         const id = req.params.id;
 
         // Search for an ad in database
-        const flip = await Flip.findById(id);
+        const flit = await Flit.findById(id);
 
-        res.json({ result: flip });
+        res.json({ result: flit });
 
     } catch (err) {
         next(err);
