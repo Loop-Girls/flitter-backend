@@ -6,7 +6,6 @@ const Comment = require('./Comment')
 
 // define flips schema
 const flipsSchema = mongoose.Schema({
-  id: { type: String },
   author: { type: String, index: true, required: true },
   image: { type: String, index: true },
   message: { type: String, index: true },
