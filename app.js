@@ -38,12 +38,12 @@ app.use(express.static(path.join(__dirname, 'public')));
  * Website routes
  */
 app.use('/', require('./routes/index'));
-// app.use('/anuncios', require('./routes/anuncios')); TODO: modificar con flips, users 
+// app.use('/anuncios', require('./routes/anuncios')); TODO: modificar con , users 
 
 /**
  * API v1 routes
  */
-// app.use('/apiv1/anuncios', require('./routes/apiv1/anuncios')); TODO: modificar con flips, users
+// app.use('/apiv1/anuncios', require('./routes/apiv1/anuncios')); TODO: modificar con  users
 app.use('/apiv1/flits', authMiddleware, require('./routes/api/flits'));
 
 
