@@ -13,6 +13,12 @@ require('./models'); // Connect DB & register models
 var indexRouter = require('./routes/index');
 var flitsRouter = require('./routes/api/flits');
 
+var router = express.Router();
+router.use(function (req, res, next) {
+req.user = userModel.find(req.body.userId);
+next();
+});
+
 const authMiddleware = require('./lib/authMiddleware');
 const app = express();
 // view engine setup

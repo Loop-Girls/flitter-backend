@@ -1,29 +1,41 @@
 {
     "flits": [
         {
-            "author": "Karen",
+            "_id": "63dc32ea501f7847052c2369",
+            "author": "Karen2",
             "image": null,
-            "message": "Hello, this is my first flit",
+            "message": "Hello, this is my flit 2",
             "date": "2023-02-02",
             "kudos": [
                 {
+                    "_id": "63dc39d07bd958e0a700ecfa",
                     "email": "firstUser@fakemail.com",
                     "password": "1234",
                     "name": "kyl",
                     "role": "user",
                     "avatar": null,
-                    "following": [],
-                    "followers": []
+                    "following": null,
+                    "followers": null
                 }
             ],
             "comments": [
                 {
-                    "author":   "Follower1" ,
-                    "image":    "http://localhost:3000/images/flits/bici.png" ,
-                    "message":   "Welcome!",
-                    "kudos":    []
+                    "_id": "63dc39d07bd958e0a700ecfb",
+                    "author": "Follower1",
+                    "image": "http://localhost:3000/images/flits/bici.png",
+                    "message": "Welcome!",
+                    "kudos": null
                 }
             ]
+        },
+        {
+            "_id": "63dc39857bd958e0a700ecf7",
+            "author": "postman",
+            "message": "flit from postman",
+            "date": "2023-02-02",
+            "kudos": [],
+            "comments": [],
+            "__v": 0
         }
     ]
 }
