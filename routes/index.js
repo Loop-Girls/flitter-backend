@@ -2,14 +2,14 @@
 'use strict';
 
 const router = require('express').Router();
-const Flip = require('../models/Flip');
+const Flit = require('../models/Flit');
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  Flip.find({}, function (err, flips) {
+  Flit.find({}, function (err, flits) {
       if (err) {
           console.log(err);
       } else {
-          res.render('index', {flips });
+          res.render('index', {flits });
       }
   })
 
