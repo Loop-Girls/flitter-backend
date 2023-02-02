@@ -1,19 +1,19 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const {Follower} = require('./Follower')
+const Follower = require('./Follower')
 
 // define flips schema
 const usersSchema = mongoose.Schema({
     name:   {type: String, index: true, required: true} ,
     email:    {type: String, index: true} ,
     avatar:   {type: String, index: true},
-    followers:    {type: [Follower], index: true},
-    following: {type: [Follower], index: true}
+    followers:    {type: [Follower.Schema], index: true},
+    following: {type: [Follower.Schema], index: true}
 });
 
 usersSchema.statics.lista = function (filtro, skip, limit, campos, sort) {
-  const query = Ads.find(filtro); // this does only return the query not executed
+  const query = Users.find(filtro); // this does only return the query not executed
   query.skip(skip);
   query.limit(limit);
   query.select(campos);
