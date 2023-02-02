@@ -64,7 +64,7 @@ router.get('/', async (req, res, next) => {
             filtro.image = image.toLocaleLowerCase();
         }
 
-        //TODO maybe
+        //TODO: maybe
         //   if (tag) {// /apiv1/ads?tags=lifestyle,work
         //     if (tag.includes(',')) {
         //       filtro.tags = { '$all': tag.split(',') }
