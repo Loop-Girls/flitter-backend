@@ -15,7 +15,7 @@ const flitsSchema = mongoose.Schema({
 });
 
 flitsSchema.statics.lista = function (filtro, skip, limit, campos, sort) {
-  const query = Ads.find(filtro); // this does only return the query not executed
+  const query = Flits.find(filtro); // this does only return the query not executed
   query.skip(skip);
   query.limit(limit);
   query.select(campos);
