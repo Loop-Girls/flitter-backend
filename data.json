@@ -1,9 +1,9 @@
 {
     "flits": [
         {
-            "author": "Karen",
+            "author": "Karen2",
             "image": null,
-            "message": "Hello, this is my first flit",
+            "message": "Hello, this is my flit 2",
             "date": "2023-02-02",
             "kudos": [
                 {
@@ -12,8 +12,8 @@
                     "name": "kyl",
                     "role": "user",
                     "avatar": null,
-                    "following": [],
-                    "followers": []
+                    "following": null,
+                    "followers": null
                 }
             ],
             "comments": [
@@ -21,7 +21,7 @@
                     "author":   "Follower1" ,
                     "image":    "http://localhost:3000/images/flits/bici.png" ,
                     "message":   "Welcome!",
-                    "kudos":    []
+                    "kudos":    null
                 }
             ]
         }

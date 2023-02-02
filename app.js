@@ -13,6 +13,12 @@ require('./models'); // Connect DB & register models
 var indexRouter = require('./routes/index');
 var flitsRouter = require('./routes/api/flits');
 
+var router = express.Router();
+router.use(function (req, res, next) {
+req.user = userModel.find(req.body.userId);
+next();
+});
+
 const authMiddleware = require('./lib/authMiddleware');
 const app = express();
 // view engine setup
@@ -38,12 +44,13 @@ app.use(express.static(path.join(__dirname, 'public')));
  * Website routes
  */
 app.use('/', require('./routes/index'));
+
 // app.use('/anuncios', require('./routes/anuncios')); TODO: modificar con , users 
 
 /**
  * API v1 routes
  */
-// app.use('/apiv1/anuncios', require('./routes/apiv1/anuncios')); TODO: modificar con  users
+// app.use('/apiv1/flits', require('./routes/apiv1/anuncios')); TODO: modificar con  users
 app.use('/apiv1/flits', authMiddleware, require('./routes/api/flits'));
 
 
