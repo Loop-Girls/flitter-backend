@@ -10,6 +10,9 @@ const bodyParser = require('body-parser');
 const { isAPI } = require('./lib/utils');
 require('./models'); // Connect DB & register models
 
+var indexRouter = require('./routes/index');
+var flitsRouter = require('./routes/api/flits');
+
 const authMiddleware = require('./lib/authMiddleware');
 const app = express();
 // view engine setup
@@ -19,7 +22,7 @@ app.set('view engine', 'ejs');
 /**
  * Global Template variables
  */
-app.locals.title = 'Flipper';
+app.locals.title = 'Flitter';
 
 /**
  * Middlewares
@@ -41,7 +44,15 @@ app.use('/', require('./routes/index'));
  * API v1 routes
  */
 // app.use('/apiv1/anuncios', require('./routes/apiv1/anuncios')); TODO: modificar con flips, users
-app.use('/apiv1/flips', authMiddleware, require('./routes/api/flips'));
+app.use('/apiv1/flits', authMiddleware, require('./routes/api/flits'));
+
+
+// Route to flits
+app.use('/apiv1/flits', flitsRouter);
+app.use('/images/flits', express.static('public'));
+app.use('/static', express.static(path.join(__dirname, 'public')))
+
+
 /**
  * Error handlers
  */

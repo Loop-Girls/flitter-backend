@@ -14,6 +14,14 @@
                     "following": [],
                     "followers": []
                 }
+            ],
+            "comments": [
+                {
+                    "author":   "Follower1" ,
+                    "image":    "http://localhost:3000/images/flits/bici.png" ,
+                    "message":   "Welcome!",
+                    "kudos":    []
+                }
             ]
         }
     ]
