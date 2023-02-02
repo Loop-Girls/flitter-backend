@@ -124,7 +124,7 @@ router.get('/:id', async (req, res, next) => {
 // CRUD
 
 // POST /apiv1/flits(body=adData)
-// Create a flip
+// Create a flit
 router.post('/apiv1/flits', async (req, res, next) => {
     try {
 
@@ -134,7 +134,7 @@ router.post('/apiv1/flits', async (req, res, next) => {
         const flit = new Flit(adData);
 
         // save it in de database
-        const savedFlip = await flit.save();
+        const savedFlit = await flit.save();
 
         res.json({ result: savedFlit });
         // }

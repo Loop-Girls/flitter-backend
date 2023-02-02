@@ -1,9 +1,9 @@
 'use strict';
 //TODO: revisar nombres de variables y modelos
 const { askUser } = require('./lib/utils');
-const { mongoose, connectMongoose, Flip} = require('./models');
+const { mongoose, connectMongoose, Flit} = require('./models');
 
-const FLIPS_JSON = './data.json';
+const FLITS_JSON = './data.json';
 
 main().catch(err => console.error('Error!', err));
 
@@ -19,18 +19,18 @@ async function main() {
   }
 
   // Inicializar nuestros modelos
-  const flipsResult = await initFlips(FLIPS_JSON);
-  console.log(`\nFlips: Deleted ${flipsResult.deletedCount}, loaded ${flipsResult.loadedCount} from ${FLIPS_JSON}`);
+  const flitsResult = await initFlits(FLITS_JSON);
+  console.log(`\nFlits: Deleted ${flitsResult.deletedCount}, loaded ${flitsResult.loadedCount} from ${FLITS_JSON}`);
 
   // Cuando termino, cierro la conexión a la BD
   await mongoose.connection.close();
   console.log('\nDone.');
 }
 
-async function initFlips(fichero) {
+async function initFlits(fichero) {
   try {
-    const { deletedCount } = await Flip.deleteMany();
-    const loadedCount = await Flip.cargaJson(fichero);
+    const { deletedCount } = await Flit.deleteMany();
+    const loadedCount = await Flit.cargaJson(fichero);
     return { deletedCount, loadedCount };
   } catch (error) {
     return (console.log(error));

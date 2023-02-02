@@ -1,9 +1,10 @@
 {
-    "flips": [
+    "flits": [
         {
             "author": "Karen",
             "image": null,
-            "message": "Hello, this is my first flip",
+            "message": "Hello, this is my first flit",
+            "date": "2023-02-02",
             "kudos": [
                 {
                     "email": "firstUser@fakemail.com",

@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 
-// define flips schema
+// define flits schema
 const followersSchema = mongoose.Schema({
     name:   {type: String, index: true, required: true} ,
     avatar:   {type: String, index: true}
