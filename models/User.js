@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 const Follower = require('./Follower')
 
-// define flips schema
+// define flits schema
 const usersSchema = mongoose.Schema({
     name:   {type: String, index: true, required: true} ,
     email:    {type: String, index: true} ,

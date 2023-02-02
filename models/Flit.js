@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const User = require('./User')
 const Comment = require('./Comment')
 
-// define flips schema
+// define flits schema
 const flitsSchema = mongoose.Schema({
   author: { type: String, index: true, required: true },
   image: { type: String, index: true },
@@ -25,7 +25,7 @@ flitsSchema.statics.lista = function (filtro, skip, limit, campos, sort) {
 
 
 // Create the model
-const Flits = mongoose.model('Flits', flipsSchema);
+const Flits = mongoose.model('Flits', flitsSchema);
 
 // Export the model
 module.exports = Flits;
