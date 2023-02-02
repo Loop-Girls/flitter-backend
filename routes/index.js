@@ -12,6 +12,8 @@ router.get('/', function (req, res, next) {
           res.render('index', {flips });
       }
   })
+
+
 });
 
 module.exports = router;
