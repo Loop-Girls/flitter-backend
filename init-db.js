@@ -12,7 +12,7 @@ async function main() {
 
   await connectMongoose; 
 
-  const answer = await askUser('Are you sure you want to empty DB and load initial data? (no) ');
+  const answer = await askUser('Are you sure you want to empty DB and load initial data? (no/yes) ');
   if (answer.toLowerCase() !== 'yes') {
     console.log('DB init aborted! nothing has been done');
     return process.exit(0);
