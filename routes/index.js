@@ -2,15 +2,16 @@
 'use strict';
 
 const router = require('express').Router();
-const fsPromises = require('fs').promises;
-const path = require('path');
-const asyncHandler = require('express-async-handler');
-
+const Flip = require('../models/Flip');
 /* GET home page. */
-router.get('/', asyncHandler(async function (req, res) {
-  const filename = path.join(__dirname, '../README.md');
-  const readme = await fsPromises.readFile(filename, 'utf8');
-  res.render('index', { readme });
-}));
+router.get('/', function (req, res, next) {
+  Flip.find({}, function (err, flips) {
+      if (err) {
+          console.log(err);
+      } else {
+          res.render('index', {flips });
+      }
+  })
+});
 
 module.exports = router;

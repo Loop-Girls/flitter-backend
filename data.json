@@ -1,0 +1,20 @@
+{
+    "flips": [
+        {
+            "author": "Karen",
+            "image": null,
+            "message": "Hello, this is my first flip",
+            "kudos": [
+                {
+                    "email": "firstUser@fakemail.com",
+                    "password": "1234",
+                    "name": "kyl",
+                    "role": "user",
+                    "avatar": null,
+                    "following": [],
+                    "followers": []
+                }
+            ]
+        }
+    ]
+}

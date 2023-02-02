@@ -10,6 +10,7 @@ const bodyParser = require('body-parser');
 const { isAPI } = require('./lib/utils');
 require('./models'); // Connect DB & register models
 
+const authMiddleware = require('./lib/authMiddleware');
 const app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -40,7 +41,7 @@ app.use('/', require('./routes/index'));
  * API v1 routes
  */
 // app.use('/apiv1/anuncios', require('./routes/apiv1/anuncios')); TODO: modificar con flips, users
-
+app.use('/apiv1/flips', authMiddleware, require('./routes/api/flips'));
 /**
  * Error handlers
  */

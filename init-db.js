@@ -28,7 +28,12 @@ async function main() {
 }
 
 async function initFlips(fichero) {
-  const { deletedCount } = await Flip.deleteMany();
-  const loadedCount = await Flip.cargaJson(fichero);
-  return { deletedCount, loadedCount };
+  try {
+    const { deletedCount } = await Flip.deleteMany();
+    const loadedCount = await Flip.cargaJson(fichero);
+    return { deletedCount, loadedCount };
+  } catch (error) {
+    return (console.log(error));
+  }
+
 }
