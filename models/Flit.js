@@ -9,7 +9,7 @@ const flitsSchema = mongoose.Schema({
   author: { type: String, index: true, required: true },
   image: { type: String, index: true },
   message: { type: String, index: true },
-  date: {type: Date,index: true, required:true},
+  date: {type: String,index: true, required:true},
   kudos: { type: [User.schema], index: true },
   comments: { type: [Comment.schema], index: true },
 });
