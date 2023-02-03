@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const User = require('./User')
 const Comment = require('./Comment')
 
+
 // define flits schema
 const flitsSchema = mongoose.Schema({
   author: { type: String, index: true, required: true },
