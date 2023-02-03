@@ -31,6 +31,25 @@ router.post('/', async (req, res, next) => {
     }
 });
 
+// PUT /apiv1/flips/(id) (body=agenteData)
+// Update a flip
+router.put('/:id', async (req, res, next) => {
+    try {
+  
+      const id = req.params.id;
+      const adData = req.body;
+  
+      const updateFlit = await Flit.findOneAndUpdate({ _id: id}, adData, {
+        new: true
+      });
+  
+      res.json({ result: updateFlit });
+  
+    } catch (err) {
+      next(err);
+    }
+  });
+
 // GET /apiv1/flits
 // Returns list of flits
 router.get('/', async (req, res, next) => {
@@ -47,7 +66,7 @@ router.get('/', async (req, res, next) => {
         // fields selection
         const fields = req.query.fields; // /apiv1/flits?fields=name -_id
         // sort
-        const sort = req.query.sort; // /apiv1/flits?sort=date%20name
+        const sort = req.query.sort; // /apiv1/flits?sort=date%20name // /apiv1/flits?sort=-date%20name
 
         const filtro = {};
 
@@ -122,3 +141,30 @@ router.get('/:id', async (req, res, next) => {
 });
 
 module.exports = router;
+
+
+// DELETE /apiv1/flits/:id
+// Delete a flit
+router.delete('/:id', async (req, res, next) => {
+    try {
+  
+      const id = req.params.id;
+  
+      const flit = await Flit.findById(id);
+  
+      if (!flit) {
+        
+        return next(createError(404));
+      }
+  
+      await Flit.deleteOne({ _id: id });
+  
+      res.json();
+  
+    } catch (err) {
+      next(err);
+    }
+  });
+  
+  module.exports = router;
+  

@@ -97,3 +97,28 @@ Pagination query example:
 ```
 GET /apiv1/flits?author=postman&skip=1&limit=1
 ```
+
+
+Search older:
+
+```
+GET /apiv1/flits?sort=date
+```
+
+Search most recent:
+
+```
+GET /apiv1/flits?sort=-date
+```
+
+Delete a flit:
+
+```
+DELETE /apiv1/flits/:id
+```
+
+Update a flit:
+
+```
+PUT /apiv1/flips/(id) (body=agenteData)
+```
