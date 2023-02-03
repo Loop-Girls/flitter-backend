@@ -5,8 +5,9 @@ const Follower = require('./Follower')
 
 // define users schema
 const usersSchema = mongoose.Schema({
-    name:   {type: String, index: true, required: true} ,
-    email:    {type: String, index: true} ,
+    name:   {type: String, index: true, required: true, unique: true} ,
+    email:    {type: String, index: true, required: true, unique: true, lowercase: true} ,
+    password: {type: String, required: true, minLength: 6},
     avatar:   {type: String, index: true},
     followers:    {type: [Follower.Schema], index: true},
     following: {type: [Follower.Schema], index: true}

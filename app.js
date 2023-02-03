@@ -11,7 +11,9 @@ const { isAPI } = require('./lib/utils');
 require('./models'); // Connect DB & register models
 
 var indexRouter = require('./routes/index');
-var flitsRouter = require('./routes/api/flits');
+var flitsRouter = require('./routes/api/flits'); //TODO: add user, auth routes
+
+
 
 var router = express.Router();
 router.use(function (req, res, next) {
@@ -49,7 +51,7 @@ app.use('/', require('./routes/index'));
 /**
  * API v1 routes
  */
-// app.use('/apiv1/anuncios', require('./routes/apiv1/anuncios')); TODO: modificar con users
+// app.use('/apiv1/anuncios', require('./routes/apiv1/anuncios')); TODO: modificar con users, auth
 app.use('/apiv1/flits', authMiddleware, require('./routes/api/flits'));
 
 
