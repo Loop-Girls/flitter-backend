@@ -120,5 +120,5 @@ DELETE /apiv1/flits/:id
 Update a flit:
 
 ```
-PUT /apiv1/flips/(id) (body=agenteData)
+PUT /apiv1/flits/(id) (body=agenteData)
 ```
