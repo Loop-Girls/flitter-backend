@@ -8,7 +8,7 @@ const commentsSchema = mongoose.Schema({
     author:   {type: String, index: true, required: true} ,
     image:    {type: String, index: true} ,
     message:   {type: String, index: true},
-    //TODO: add date
+    date: {type: Date, index: true, required: true},
     kudos:    {type: [User.schema], index: true},
 });
 
