@@ -4,6 +4,10 @@ const mongoose = require('mongoose');
 const User = require('./User')
 const Comment = require('./Comment')
 
+//subdocuments
+
+const childSchema = new mongoose.Schema({name: 'string'});
+
 // define flits schema
 const flitsSchema = mongoose.Schema({
   author: { type: String, index: true, required: true },
@@ -11,7 +15,7 @@ const flitsSchema = mongoose.Schema({
   message: { type: String, index: true },
   date: {type: Date,index: true, required:true}, //TODO: change type to Date?
   kudos: { type: [User.schema], index: true },
-  comments: { type: [Comment.schema], index: true },
+  comments: { type: [childSchema], index: true },
 });
 
 flitsSchema.statics.lista = function (filtro, skip, limit, campos, sort) {

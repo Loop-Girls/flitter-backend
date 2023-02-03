@@ -12,7 +12,7 @@ require('./models'); // Connect DB & register models
 
 var indexRouter = require('./routes/index');
 var flitsRouter = require('./routes/api/flits'); //TODO: add user, auth routes
-
+var authRouter = require('./routes/api/auth');
 
 
 var router = express.Router();
@@ -60,12 +60,26 @@ app.use('/apiv1/flits', flitsRouter);
 app.use('/images/flits', express.static('public'));
 app.use('/static', express.static(path.join(__dirname, 'public')))
 
+app.use('/auth', authRouter);
+
+//cookies
+app.get('/set-cookies', (req, res)=>{
+  //create cookie
+  res.setHeader('Set-Cookie', 'newUser=true');
+
+  res.send('you got he cookies!');
+});
+
+app.get('/read-cookies', (req, res)=>{ //npm i cookie-parser
+
+});
 
 /**
  * Error handlers
  */
 // catch 404 and forward to error handler
 app.use( (req, res, next) => next(createError(404)) );
+
 
 // error handler
 app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
