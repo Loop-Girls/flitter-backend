@@ -90,7 +90,7 @@ GET /apiv1/flits
         "__v": 0
     }
 ]
-
+```
 
 Pagination query example:
 
