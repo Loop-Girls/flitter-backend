@@ -31,6 +31,25 @@ router.post('/', async (req, res, next) => {
     }
 });
 
+// PUT /apiv1/flips/(id) (body=agenteData)
+// Update a flip
+router.put('/:id', async (req, res, next) => {
+    try {
+  
+      const id = req.params.id;
+      const adData = req.body;
+  
+      const updateFlit = await Flit.findOneAndUpdate({ _id: id}, adData, {
+        new: true
+      });
+  
+      res.json({ result: updateFlit });
+  
+    } catch (err) {
+      next(err);
+    }
+  });
+
 // GET /apiv1/flits
 // Returns list of flits
 router.get('/', async (req, res, next) => {
@@ -125,7 +144,7 @@ module.exports = router;
 
 
 // DELETE /apiv1/flits/:id
-// Eliminar un flit
+// Delete a flit
 router.delete('/:id', async (req, res, next) => {
     try {
   
@@ -134,8 +153,7 @@ router.delete('/:id', async (req, res, next) => {
       const flit = await Flit.findById(id);
   
       if (!flit) {
-        // const err = new Error('not found');
-        // err.status = 404;
+        
         return next(createError(404));
       }
   

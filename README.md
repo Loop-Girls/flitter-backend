@@ -111,8 +111,14 @@ Search most recent:
 GET /apiv1/flits?sort=-date
 ```
 
-Remove flit:
+Delete a flit:
 
 ```
-GET /apiv1/flits/:id
+DELETE /apiv1/flits/:id
+```
+
+Update a flit:
+
+```
+PUT /apiv1/flips/(id) (body=agenteData)
 ```
