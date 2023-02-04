@@ -10,6 +10,7 @@ const bodyParser = require('body-parser');
 const { isAPI } = require('./lib/utils');
 require('./models'); // Connect DB & register models
 
+
 var indexRouter = require('./routes/index');
 var flitsRouter = require('./routes/api/flits'); //TODO: add user, auth routes
 var authRouter = require('./routes/api/auth');
@@ -41,7 +42,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 /**
  * Website routes
  */
@@ -73,6 +73,8 @@ app.get('/set-cookies', (req, res)=>{
 app.get('/read-cookies', (req, res)=>{ //npm i cookie-parser
 
 });
+
+//TODO npm i jsonwentoken
 
 /**
  * Error handlers
