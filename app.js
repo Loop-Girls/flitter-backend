@@ -22,7 +22,7 @@ req.user = userModel.find(req.body.userId);
 next();
 });
 
-const authMiddleware = require('./lib/authMiddleware');
+const {requireAuth, basicAuthMiddleware } = require('./lib/authMiddleware');
 const app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -52,7 +52,7 @@ app.use('/', require('./routes/index'));
  * API v1 routes
  */
 // app.use('/apiv1/anuncios', require('./routes/apiv1/anuncios')); TODO: modificar con users, auth
-app.use('/apiv1/flits', authMiddleware, require('./routes/api/flits'));
+// app.use('/apiv1/flits', basicAuthMiddleware, require('./routes/api/flits')); //rpute protected with middleware
 
 
 // Route to flits
