@@ -31,7 +31,7 @@ router.post('/', async (req, res, next) => {
     }
 });
 
-// PUT /apiv1/flips/(id) (body=agenteData)
+// PUT /apiv1/flits/(id) (body=agenteData)
 // Update a flip
 router.put('/:id', async (req, res, next) => {
     try {
@@ -70,11 +70,11 @@ router.get('/', async (req, res, next) => {
 
         const filtro = {};
 
-        if (author) { // /apiv1/ads?author=Bi
+        if (author) { // /apiv1/flits?author=k
             // search for a product that it starts with those letters
             filtro.author = new RegExp('^' + req.query.author, "i");;
         }
-        if (message) { // /apiv1/ads?message=Bi
+        if (message) { // /apiv1/flits?message=h
             // search for a product that it starts with those letters
             filtro.message = new RegExp('^' + req.query.message, "i");;
         }
