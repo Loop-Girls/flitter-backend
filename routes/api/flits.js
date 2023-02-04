@@ -31,7 +31,7 @@ router.post('/', async (req, res, next) => {
     }
 });
 
-// PUT /apiv1/flips/(id) (body=agenteData)
+// PUT /apiv1/flits/(id) (body=agenteData)
 // Update a flip
 router.put('/:id', async (req, res, next) => {
     try {
