@@ -65,7 +65,7 @@
         },
         {
             "author": "Bea3",
-            "image":"http://localhost:3000/images/startfish1.jpg",
+            "image":"http://localhost:3000/public/images/startfish1.jpg",
             "message": "flit from postman 6",
             "date": "2023-02-08",
             "kudos": [],
@@ -74,6 +74,7 @@
         },
         {
             "author": "Bea4",
+            "image": "bici.png",
             "message": "flit from postman 7",
             "date": "2023-02-09",
             "kudos": [],
@@ -92,6 +93,14 @@
             "author": "Bea6",
             "message": "flit from postman 9",
             "date": "2023-02-11",
+            "kudos": [],
+            "comments": [],
+            "__v": 0
+        },
+        {
+            "author": "Bob esponja",
+            "message": "vivo en una piña debajo del mar",
+            "date": "2023-03-07",
             "kudos": [],
             "comments": [],
             "__v": 0

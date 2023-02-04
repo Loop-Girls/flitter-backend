@@ -70,11 +70,11 @@ router.get('/', async (req, res, next) => {
 
         const filtro = {};
 
-        if (author) { // /apiv1/ads?author=Bi
+        if (author) { // /apiv1/flits?author=k
             // search for a product that it starts with those letters
             filtro.author = new RegExp('^' + req.query.author, "i");;
         }
-        if (message) { // /apiv1/ads?message=Bi
+        if (message) { // /apiv1/flits?message=h
             // search for a product that it starts with those letters
             filtro.message = new RegExp('^' + req.query.message, "i");;
         }
