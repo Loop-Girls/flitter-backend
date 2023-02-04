@@ -15,7 +15,7 @@ const flitsSchema = mongoose.Schema({
   message: { type: String, index: true },
   date: {type: Date,index: true, required:true}, //TODO: change type to Date?
   kudos: { type: [User.schema], index: true },
-  comments: { type: [childSchema], index: true },
+  comments: { type: [Comment.schema], index: true },
 });
 
 flitsSchema.statics.lista = function (filtro, skip, limit, campos, sort) {

@@ -31,21 +31,6 @@ usersSchema.statics.lista = function (filtro, skip, limit, campos, sort) {
   query.sort(sort);
   return query.exec() // here the query is executed and a promise is returned
 }
-//fire a function after doc saved to db
-usersSchema.post('save', function(doc, next){
-  console.log('new user was created &saved', doc);
-  next();
-})
-
-//fire a function before doc saved to db
-usersSchema.pre('save', async function(next){
-  // console.log('user about to be created and saved', this)
-  const salt = await bcrypt.genSalt();
-  //get hash version of the password
-  this.password = await bcrypt.hash(this.password, salt);
-  next();
-
-});
 
 // Create the model
 const Users = mongoose.model('Users', usersSchema);
