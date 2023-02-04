@@ -71,6 +71,7 @@
         },
         {
             "author": "Bea3",
+            "image":"http://localhost:3000/images/startfish1.jpg",
             "message": "flit from postman 6",
             "date": "2023-02-08",
             "kudos": [],
