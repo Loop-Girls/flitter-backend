@@ -1,5 +1,5 @@
 'use strict';
-
+var cors = require('cors')
 const express = require('express');
 const createError = require('http-errors');
 const path = require('path');
@@ -10,10 +10,9 @@ const bodyParser = require('body-parser');
 const { isAPI } = require('./lib/utils');
 require('./models'); // Connect DB & register models
 
-
 var indexRouter = require('./routes/index');
 var flitsRouter = require('./routes/api/flits'); //TODO: add user, auth routes
-var authRouter = require('./routes/api/auth');
+
 
 
 var router = express.Router();
@@ -22,7 +21,7 @@ req.user = userModel.find(req.body.userId);
 next();
 });
 
-const {requireAuth, basicAuthMiddleware } = require('./lib/authMiddleware');
+const authMiddleware = require('./lib/authMiddleware');
 const app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -42,6 +41,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 /**
  * Website routes
  */
@@ -52,36 +52,20 @@ app.use('/', require('./routes/index'));
  * API v1 routes
  */
 // app.use('/apiv1/anuncios', require('./routes/apiv1/anuncios')); TODO: modificar con users, auth
-// app.use('/apiv1/flits', basicAuthMiddleware, require('./routes/api/flits')); //rpute protected with middleware
+// app.use('/apiv1/flits', authMiddleware, require('./routes/api/flits')); //route protected by basicAuth
 
-
+app.use(cors());
 // Route to flits
 app.use('/apiv1/flits', flitsRouter);
 app.use('/images/flits', express.static('public'));
 app.use('/static', express.static(path.join(__dirname, 'public')))
 
-app.use('/auth', authRouter);
-
-//cookies
-app.get('/set-cookies', (req, res)=>{
-  //create cookie
-  res.setHeader('Set-Cookie', 'newUser=true');
-
-  res.send('you got he cookies!');
-});
-
-app.get('/read-cookies', (req, res)=>{ //npm i cookie-parser
-
-});
-
-//TODO npm i jsonwentoken
 
 /**
  * Error handlers
  */
 // catch 404 and forward to error handler
 app.use( (req, res, next) => next(createError(404)) );
-
 
 // error handler
 app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
