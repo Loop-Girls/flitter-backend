@@ -67,7 +67,7 @@
         },
         {
             "author": "Bea3",
-            "image":"http://localhost:3000/images/flits/startfish1.jpg",
+            "image":"http://localhost:3000/images/flits/starfish1.jpg",
             "message": "flit from postman 6",
             "date": "2023-02-08",
             "kudos": [],
@@ -76,7 +76,7 @@
         },
         {
             "author": "Bea4",
-            "image": "bici.png",
+            "image": "http://localhost:3000/images/flits/bici.png",
             "message": "flit from postman 7",
             "date": "2023-02-09",
             "kudos": [],
