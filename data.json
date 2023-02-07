@@ -8,7 +8,7 @@
                 {
                     "email": "firstUser@fakemail.com",
                     "password": "123456",
-                    "name": "kyl",
+                    "username": "kyl",
                     "role": "user",
                     "avatar":""
               
