@@ -1,0 +1,28 @@
+{
+    "users": [
+        {
+            "email": "firstUser@fakemail.com",
+            "password": "123456",
+            "username": "kyl",
+            "role": "user",
+            "avatar":""
+      
+        },
+        {
+            "email": "firstUser2@fakemail.com",
+            "password": "123456",
+            "username": "FlitterFan",
+            "role": "user",
+            "avatar":""
+      
+        },
+        {
+            "email": "firstUser3@fakemail.com",
+            "password": "123456",
+            "username": "Nauel",
+            "role": "user",
+            "avatar":""
+      
+        }
+    ]
+}

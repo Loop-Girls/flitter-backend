@@ -1,4 +1,5 @@
 'use strict';
+const fsPromises = require('fs').promises;
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const Follower = require('./Follower')
@@ -31,6 +32,29 @@ usersSchema.statics.lista = function (filtro, skip, limit, campos, sort) {
   query.sort(sort);
   return query.exec() // here the query is executed and a promise is returned
 }
+/**
+ * load a json of flits
+ */
+usersSchema.statics.cargaJson = async function (fichero) {
+
+  const data = await fsPromises.readFile(fichero, { encoding: 'utf8' });
+
+  if (!data) {
+    throw new Error(fichero + ' is empty!');
+  }
+
+  const users = JSON.parse(data).users;
+  const numUsers = users.length;
+
+  for (var i = 0; i < users.length; i++) {
+    await (new Users(users[i])).save();
+  }
+
+  return numUsers;
+
+};
+
+
 
 // Create the model
 const Users = mongoose.model('Users', usersSchema);
