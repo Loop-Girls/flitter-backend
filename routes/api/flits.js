@@ -51,7 +51,7 @@ router.put('/:id', async (req, res, next) => {
   });
 
 // GET /apiv1/flits
-// Returns list of flits
+// Returns list of flits all
 router.get('/', async (req, res, next) => {
     try {
 
@@ -122,6 +122,9 @@ router.get('/', async (req, res, next) => {
         next(err);
     }
 });
+
+//TODO: get all flits from following
+
 
 // GET /apiv1/flits/(id)
 // Returns a flit
