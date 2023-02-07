@@ -1,4 +1,4 @@
-# Flitter
+#Flitter
 
 Deploy:
 
@@ -23,7 +23,7 @@ Start the application in development with:
 ```sh
 npm run dev
 ```
-Authentification:
+Authentification: (disabled)
 
 ```sh
 user: admin
@@ -36,59 +36,115 @@ Flits list:
 ```
 GET /apiv1/flits
 [
-    {
-        "_id": "63dc32ea501f7847052c2369",
-        "author": "Karen2",
-        "message": "Hello, this is my flit 2",
-        "date": "2023-02-02",
-        "kudos": [
-            {
-                "name": "kyl",
-                "email": "firstUser@fakemail.com",
-                "avatar": "",
-                "followers": [],
-                "following": [],
-                "_id": "63dc4047aba142f1e0b560da"
-            }
-        ],
-        "comments": [
-            {
-                "author": "Follower1",
-                "image": "http://localhost:3000/images/flits/bici.png",
-                "message": "Welcome!",
-                "_id": "63dc4047aba142f1e0b560db",
-                "kudos": []
-            }
-        ],
-        "__v": 0
-    },
-    {
-        "_id": "63dc39857bd958e0a700ecf7",
-        "author": "postman",
-        "message": "flit from postman",
-        "date": "2023-02-02",
-        "kudos": [],
-        "comments": [],
-        "__v": 0
-    },
-    {
-        "_id": "63dc3b925e37a9129167fa71",
-        "author": "postman2",
-        "message": "flit from postman 2",
-        "date": "Wed Feb 01 2023 18:00:00 GMT-0600 (hora estándar central)",
-        "kudos": [],
-        "comments": [],
-        "__v": 0
-    },
-    {
-        "_id": "63dc3e9b9842a11e35139faf",
-        "author": "postman3",
-        "message": "flit from postman 3",
-        "date": "2023-02-02",
-        "kudos": [],
-        "comments": [],
-        "__v": 0
-    }
+  {
+    "_id": "63ddae60bf98e0cdc171c2ec",
+    "author": "Karen2",
+    "message": "Hello, this is my flit 2",
+    "date": "2023-02-02T00:00:00.000Z",
+    "kudos": [
+      {
+        "name": "kyl",
+        "email": "firstuser@fakemail.com",
+        "password": "123456",
+        "avatar": "",
+        "followers": [],
+        "following": [],
+        "_id": "63ddae60bf98e0cdc171c2ed"
+      }
+    ],
+    "comments": [
+      {
+        "author": "Follower1",
+        "image": "http://localhost:3000/images/flits/bici.png",
+        "message": "Welcome!",
+        "date": "2023-02-02T00:00:00.000Z",
+        "_id": "63ddae60bf98e0cdc171c2ee",
+        "kudos": []
+      }
+    ],
+    "__v": 0
+  },
+  {
+    "_id": "63ddae60bf98e0cdc171c2f0",
+    "author": "postman",
+    "message": "flit from postman",
+    "date": "2023-02-02T00:00:00.000Z",
+    "kudos": [],
+    "comments": [],
+    "__v": 0
+  },
+  {
+    "_id": "63ddae60bf98e0cdc171c2f2",
+    "author": "postman2",
+    "message": "flit from postman 2",
+    "date": "2023-02-02T00:00:00.000Z",
+    "kudos": [],
+    "comments": [],
+    "__v": 0
+  },
+  {
+    "_id": "63ddae60bf98e0cdc171c2f4",
+    "author": "postman3",
+    "message": "flit from postman 3",
+    "date": "2023-02-02T00:00:00.000Z",
+    "kudos": [],
+    "comments": [],
+    "__v": 0
+  },
+  {
+    "_id": "63ddae60bf98e0cdc171c2f6",
+    "author": "Bea",
+    "message": "flit from postman 4",
+    "date": "2023-02-06T00:00:00.000Z",
+    "kudos": [],
+    "comments": [],
+    "__v": 0
+  },
+  {
+    "_id": "63ddae60bf98e0cdc171c2f8",
+    "author": "Bea2",
+    "message": "flit from postman 5",
+    "date": "2023-02-07T00:00:00.000Z",
+    "kudos": [],
+    "comments": [],
+    "__v": 0
+  },
+  {
+    "_id": "63ddae60bf98e0cdc171c2fa",
+    "author": "Bea3",
+    "message": "flit from postman 6",
+    "date": "2023-02-08T00:00:00.000Z",
+    "kudos": [],
+    "comments": [],
+    "__v": 0
+  },
+  {
+    "_id": "63ddae60bf98e0cdc171c2fc",
+    "author": "Bea4",
+    "message": "flit from postman 7",
+    "date": "2023-02-09T00:00:00.000Z",
+    "kudos": [],
+    "comments": [],
+    "__v": 0
+  },
+  {
+    "_id": "63ddae60bf98e0cdc171c2fe",
+    "author": "Bea5",
+    "message": "flit from postman 8",
+    "date": "2023-02-10T00:00:00.000Z",
+    "kudos": [],
+    "comments": [],
+    "__v": 0
+  },
+  {
+    "_id": "63ddae60bf98e0cdc171c300",
+    "author": "Bea6",
+    "message": "flit from postman 9",
+    "date": "2023-02-11T00:00:00.000Z",
+    "kudos": [],
+    "comments": [],
+    "__v": 0
+  }
 ]
 ```
 
@@ -96,6 +152,22 @@ Pagination query example:
 
 ```
 GET /apiv1/flits?author=postman&skip=1&limit=1
+
+```
+
+search for a message that it starts with those letters
+
+```
+GET /apiv1/flits?message=h
+
+```
+
+
+search for a flip that it starts with those letters
+
+```
+GET /apiv1/flits?author=k
+
 ```
 
 
@@ -120,5 +192,5 @@ DELETE /apiv1/flits/:id
 Update a flit:
 
 ```
-PUT /apiv1/flips/(id) (body=agenteData)
+PUT /apiv1/flits/(id) (body=agenteData)
 ```

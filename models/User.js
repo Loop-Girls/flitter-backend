@@ -1,26 +1,37 @@
 'use strict';
-
+const fsPromises = require('fs').promises;
+const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const Follower = require('./Follower')
-const bcrypt = require('bcrypt');
 
+//import function to validate email
+const { isEmail } = require('validator');
 // define users schema
 const usersSchema = mongoose.Schema({
-    username:   {type: String, index: true, required: true, unique: true} ,
-    email:    {type: String, index: true, required: true, unique: true, lowercase: true} ,
-    password: {type: String, required: true, minLength: 6},
-    avatar:   {type: String, index: true},
-    followers: [{
-      type: mongoose.ObjectId,
-      ref: "Users",
-      index: true,
-    }],
-    following:[{
-      type: mongoose.ObjectId,
-      ref: "Users",
-      index: true,
-    }],
+  username: { type: String, index: true, required: true, unique: true },
+  email: {
+    type: String,
+    index: true,
+    required: true,
+    unique: true,
+    lowercase: true,
+    validate: [isEmail, 'Please enter a valid email']
+  },// validate it is an email: npm install validator ,
+  password: { type: String, required: true, minLength: [6, 'Password must be at least 6 characters length'], },
+  avatar: { type: String, index: true },
+  followers: [{
+    type: mongoose.ObjectId,
+    ref: "Users",
+    index: true,
+  }],
+  following: [{
+    type: mongoose.ObjectId,
+    ref: "Users",
+    index: true,
+  }],
+
 });
+
 
 usersSchema.statics.lista = function (filtro, skip, limit, campos, sort) {
   const query = Users.find(filtro); // this does only return the query not executed
@@ -30,14 +41,31 @@ usersSchema.statics.lista = function (filtro, skip, limit, campos, sort) {
   query.sort(sort);
   return query.exec() // here the query is executed and a promise is returned
 }
-//fire a function after doc saved to db
-usersSchema.post('save', function(doc, next){
-  console.log('new user was created &saved', doc);
-  next();
-})
+/**
+ * load a json of flits
+ */
+usersSchema.statics.cargaJson = async function (fichero) {
+
+  const data = await fsPromises.readFile(fichero, { encoding: 'utf8' });
+
+  if (!data) {
+    throw new Error(fichero + ' is empty!');
+  }
+
+  const users = JSON.parse(data).users;
+  const numUsers = users.length;
+
+  for (var i = 0; i < users.length; i++) {
+    await (new Users(users[i])).save();
+  }
+
+  return numUsers;
+
+};
+
 
 //fire a function before doc saved to db
-usersSchema.pre('save', async function(next){
+usersSchema.pre('save', async function (next) {
   // console.log('user about to be created and saved', this)
   const salt = await bcrypt.genSalt();
   //get hash version of the password
@@ -47,13 +75,13 @@ usersSchema.pre('save', async function(next){
 });
 
 //static method to login user
-usersSchema.statics.login = async function (email, password){
+usersSchema.statics.login = async function (email, password) {
   //check if user exists in database
-  const user = await this.findOne({email:email});
-  if(user){
+  const user = await this.findOne({ email: email });
+  if (user) {
     //compare password from login with password stored in database that is hashed
     const auth = bcrypt.compare(password, user.password);
-    if(auth){
+    if (auth) {
       return user;
     }
     throw Error('incorrect password'); //change to credentials

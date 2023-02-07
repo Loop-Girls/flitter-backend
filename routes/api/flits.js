@@ -31,7 +31,7 @@ router.post('/', async (req, res, next) => {
     }
 });
 
-// PUT /apiv1/flips/(id) (body=agenteData)
+// PUT /apiv1/flits/(id) (body=agenteData)
 // Update a flip
 router.put('/:id', async (req, res, next) => {
     try {
@@ -57,6 +57,7 @@ router.get('/', async (req, res, next) => {
 
         // filters
         const author = req.query.author;
+        const exactAuthor = req.query.exactAuthor;
         const image = req.query.image;
         const message = req.query.message;
         const kudos = req.query.kudos;
@@ -69,12 +70,15 @@ router.get('/', async (req, res, next) => {
         const sort = req.query.sort; // /apiv1/flits?sort=date%20name // /apiv1/flits?sort=-date%20name
 
         const filtro = {};
+        if(exactAuthor){
+          filtro.author = req.query.exactAuthor;
+        }
 
-        if (author) { // /apiv1/ads?author=Bi
+        if (author) { // /apiv1/flits?author=k
             // search for a product that it starts with those letters
             filtro.author = new RegExp('^' + req.query.author, "i");;
         }
-        if (message) { // /apiv1/ads?message=Bi
+        if (message) { // /apiv1/flits?message=h
             // search for a product that it starts with those letters
             filtro.message = new RegExp('^' + req.query.message, "i");;
         }
@@ -117,7 +121,7 @@ router.get('/', async (req, res, next) => {
 
 
         const flits = await Flit.lista(filtro, skip, limit, fields, sort);
-        res.json({ results: flits });
+        res.json(flits);
     } catch (err) {
         next(err);
     }
@@ -136,7 +140,7 @@ router.get('/:id', async (req, res, next) => {
         // Search for an ad in database
         const flit = await Flit.findById(id);
 
-        res.json({ result: flit });
+        res.json( flit );
 
     } catch (err) {
         next(err);

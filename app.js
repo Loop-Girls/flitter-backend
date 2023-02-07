@@ -1,5 +1,5 @@
 'use strict';
-
+var cors = require('cors')
 const express = require('express');
 const createError = require('http-errors');
 const path = require('path');
@@ -52,9 +52,9 @@ app.use('/', require('./routes/index'));
  * API v1 routes
  */
 // app.use('/apiv1/anuncios', require('./routes/apiv1/anuncios')); TODO: modificar con users, auth
-// app.use('/apiv1/flits', authMiddleware, require('./routes/api/flits'));
+// app.use('/apiv1/flits', authMiddleware, require('./routes/api/flits')); //route protected by basicAuth
 
-
+app.use(cors());
 // Route to flits
 app.use('/apiv1/flits', flitsRouter);
 app.use('/images/flits', express.static('public'));
