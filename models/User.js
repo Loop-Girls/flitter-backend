@@ -2,10 +2,11 @@
 
 const mongoose = require('mongoose');
 const Follower = require('./Follower')
+const bcrypt = require('bcrypt');
 
 // define users schema
 const usersSchema = mongoose.Schema({
-    name:   {type: String, index: true, required: true, unique: true} ,
+    username:   {type: String, index: true, required: true, unique: true} ,
     email:    {type: String, index: true, required: true, unique: true, lowercase: true} ,
     password: {type: String, required: true, minLength: 6},
     avatar:   {type: String, index: true},
@@ -36,6 +37,21 @@ usersSchema.pre('save', async function(next){
   next();
 
 });
+
+//static method to login user
+usersSchema.statics.login = async function (email, password){
+  //check if user exists in database
+  const user = await this.findOne({email:email});
+  if(user){
+    //compare password from login with password stored in database that is hashed
+    const auth = bcrypt.compare(password, user.password);
+    if(auth){
+      return user;
+    }
+    throw Error('incorrect password'); //change to credentials
+  }
+  throw Error("incorrect email"); //change to credencials
+}
 
 // Create the model
 const Users = mongoose.model('Users', usersSchema);

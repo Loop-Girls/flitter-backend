@@ -12,7 +12,7 @@ require('./models'); // Connect DB & register models
 
 var indexRouter = require('./routes/index');
 var flitsRouter = require('./routes/api/flits'); //TODO: add user, auth routes
-
+var authRouter = require('./routes/api/auth');
 
 
 var router = express.Router();
@@ -59,6 +59,9 @@ app.use('/', require('./routes/index'));
 app.use('/apiv1/flits', flitsRouter);
 app.use('/images/flits', express.static('public'));
 app.use('/static', express.static(path.join(__dirname, 'public')))
+
+//route to auth
+app.use('apiv1/auth', authRouter);
 
 
 /**
