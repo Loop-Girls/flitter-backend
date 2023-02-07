@@ -13,13 +13,14 @@ require('./models'); // Connect DB & register models
 var indexRouter = require('./routes/index');
 var flitsRouter = require('./routes/api/flits'); //TODO: add user, auth routes
 var authRouter = require('./routes/api/auth');
+var usersRouter = require('./routes/api/users')
 
 
-var router = express.Router();
-router.use(function (req, res, next) {
-req.user = userModel.find(req.body.userId);
-next();
-});
+// var router = express.Router();
+// router.use(function (req, res, next) {
+// req.user = userModel.find(req.body.userId);
+// next();
+// });
 
 const authMiddleware = require('./lib/authMiddleware');
 const app = express();
@@ -59,6 +60,8 @@ app.use(cors());
 app.use('/apiv1/flits', flitsRouter);
 app.use('/images/flits', express.static('public'));
 app.use('/static', express.static(path.join(__dirname, 'public')))
+
+app.use('/apiv1/users', usersRouter);
 
 //route to auth
 app.use('apiv1/auth', authRouter);

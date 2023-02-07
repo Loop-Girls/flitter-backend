@@ -23,8 +23,8 @@ router.put('/:id', async (req, res, next) => {
   }
 });
 
-// GET /apiv1/flits
-// Returns list of flits
+// GET /apiv1/users
+// Returns list of users
 router.get('/', async (req, res, next) => {
   try {
 
@@ -32,13 +32,13 @@ router.get('/', async (req, res, next) => {
       const name = req.query.name;
       const id= req.query.id;
    
-      // pagination /apiv1/flits?skip=1&limit=1
+      // pagination /apiv1/users?skip=1&limit=1
       const skip = req.query.skip;
       const limit = req.query.limit;
       // fields selection
-      const fields = req.query.fields; // /apiv1/flits?fields=name -_id
+      const fields = req.query.fields; // /apiv1/users?fields=name -_id
       // sort
-      const sort = req.query.sort; // /apiv1/flits?sort=date%20name // /apiv1/flits?sort=-date%20name
+      const sort = req.query.sort; // /apiv1/users?sort=date%20name // /apiv1/users?sort=-date%20name
 
       const filtro = {};
 
@@ -46,24 +46,17 @@ router.get('/', async (req, res, next) => {
           // search for a product that it starts with those letters
           filtro.name = new RegExp('^' + req.query.name, "i");;
       }
-      if (message) { // /apiv1/ads?message=Bi
-          // search for a product that it starts with those letters
-          filtro.message = new RegExp('^' + req.query.message, "i");;
-      }
      
-      if (image) {// /apiv1/flits?image=false
-          filtro.image = image.toLocaleLowerCase();
-      }
 
-      const flits = await Flit.lista(filtro, skip, limit, fields, sort);
-      res.json({ results: flits });
+      const users = await User.lista(filtro, skip, limit, fields, sort);
+      res.json(users);
   } catch (err) {
       next(err);
   }
 });
 
-// GET /apiv1/flits/(id)
-// Returns a flit
+// GET /apiv1/users/(id)
+// Returns a user
 router.get('/:id', async (req, res, next) => {
   try {
 
@@ -79,11 +72,9 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-module.exports = router;
 
-
-// DELETE /apiv1/flits/:id
-// Delete a flit
+// DELETE /apiv1/users/:id
+// Delete a user
 router.delete('/:id', async (req, res, next) => {
   try {
 
@@ -104,7 +95,5 @@ router.delete('/:id', async (req, res, next) => {
     next(err);
   }
 });
-
-module.exports = router;
 
 module.exports = router;
