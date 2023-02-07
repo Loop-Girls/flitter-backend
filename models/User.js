@@ -10,8 +10,16 @@ const usersSchema = mongoose.Schema({
     email:    {type: String, index: true, required: true, unique: true, lowercase: true} ,
     password: {type: String, required: true, minLength: 6},
     avatar:   {type: String, index: true},
-    followers:    {type: [Follower.Schema], index: true},
-    following: {type: [Follower.Schema], index: true}
+    followers: [{
+      type: mongoose.ObjectId,
+      ref: "Users",
+      index: true,
+    }],
+    following:[{
+      type: mongoose.ObjectId,
+      ref: "Users",
+      index: true,
+    }],
 });
 
 usersSchema.statics.lista = function (filtro, skip, limit, campos, sort) {
