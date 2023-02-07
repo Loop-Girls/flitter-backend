@@ -10,7 +10,7 @@
                     "_id": "63dc4047aba142f1e0b560da",
                     "email": "firstUser@fakemail.com",
                     "password": "123456",
-                    "name": "kyl",
+                    "username": "kyl",
                     "role": "user",
                     "avatar":""
               
