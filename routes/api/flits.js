@@ -29,7 +29,7 @@ router.post('/post', multer.single("imagen"), async function (req, res, next) {
       author: req.body.author,
       image: image,
       message: req.body.message,
-      date: req.body.date, //TODO: change type to Date?
+      date: req.body.date.toString(), //TODO: change type to Date?
     });
     try {
       const savedFlit = await flit.save();
@@ -46,24 +46,24 @@ router.post('/post', multer.single("imagen"), async function (req, res, next) {
 
 
 });
-router.post('/post', async (req, res, next) => {
-  try {
+// router.post('/post', async (req, res, next) => {
+//   try {
 
-    const adData = req.body;
-    // instanciate new ad in the memory
-    const flit = new Flit(adData);
+//     const adData = req.body;
+//     // instanciate new ad in the memory
+//     const flit = new Flit(adData);
 
-    // save it in de database
-    const savedFlit = await flit.save();
+//     // save it in de database
+//     const savedFlit = await flit.save();
 
-    res.json({ result: savedFlit });
-    // }
+//     res.json({ result: savedFlit });
+//     // }
 
 
-  } catch (err) {
-    next(err);
-  }
-});
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 // PUT /apiv1/flits/(id) (body=agenteData)
 // Update a flip
