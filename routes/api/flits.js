@@ -3,19 +3,48 @@
 const express = require('express');
 const createError = require('http-errors');
 const Flit = require('../../models/Flit');
-
+const multer= require('../../config/multer');
 const router = express.Router();
+const imageRoute = 'http://localhost:3000/images/flits/'
 
 
 // CRUD
 
 // POST /apiv1/flits(body=adData)
 // Create a flit
-router.post('/', async (req, res, next) => {
+
+
+  router.post('/postWithImg', multer.single("imagen"),  async function(req, res, next) {
+    console.log(req.body);
+    // console.log(req.file.filename);
+    let image = '';
+    if(req.file){
+      image = imageRoute+req.file.filename;
+    }
+  
+    const flit = new Flit({
+      author: req.body.author,
+      image: image,
+      message: req.body.message,
+      date: req.body.date, //TODO: change type to Date?
+    });
     try {
+      const savedFlit = await flit.save();
+      console.log('Saved '+ savedFlit);
+      res.json({ result: savedFlit });
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
 
+  
+   
+  
+  });
+router.post('/post', async (req, res, next) => {
+    try {
+  
         const adData = req.body;
-
         // instanciate new ad in the memory
         const flit = new Flit(adData);
 
