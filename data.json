@@ -10,8 +10,7 @@
                     "password": "123456",
                     "username": "kyl",
                     "role": "user",
-                    "avatar":""
-              
+                    "avatar": ""
                 }
             ],
             "comments": [
@@ -67,7 +66,7 @@
         },
         {
             "author": "Bea3",
-            "image":"http://localhost:3000/images/flits/starfish1.jpg",
+            "image": "http://localhost:3000/images/flits/starfish1.jpg",
             "message": "flit from postman 6",
             "date": "2023-02-08",
             "kudos": [],
@@ -106,7 +105,15 @@
             "kudos": [],
             "comments": [],
             "__v": 0
-        }
-
+        },
+        {
+            "_id": "63e430364e4c27fd510711d7",
+            "author": "postmanKaren",
+            "image": "http://localhost:3000/images/flits/1675898934303.png",
+            "date": "2023-02-08T00:00:00.000Z",
+            "kudos": [],
+            "comments": []
+   
+          }
     ]
 }
