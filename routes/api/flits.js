@@ -17,7 +17,7 @@ const imageRoute = 'http://localhost:3000/images/flits/'
 router.post('/post', multer.single("imagen"), async function (req, res, next) {
   console.log(req.file);
   console.log(req.body);
-  if (req.body.message == undefined && req.file == undefined) {
+  if (req.body.message == undefined && req.file == undefined || req.body.message=='' && req.file == undefined) {
     res.status(400).json({ error:"Can't post a flit without any message or picture." });
   } else {
     let image = '';
@@ -37,7 +37,7 @@ router.post('/post', multer.single("imagen"), async function (req, res, next) {
       res.json({ result: savedFlit });
     } catch (error) {
       console.log(error);
-      return error;
+      res.status(400).json({ error:"Can't post a flit without any message or picture." });
     }
   }
 
@@ -95,6 +95,7 @@ router.get('/', async (req, res, next) => {
     const image = req.query.image;
     const message = req.query.message;
     const kudos = req.query.kudos;
+    const date = req.query.date;
     // pagination /apiv1/flits?skip=1&limit=1
     const skip = req.query.skip;
     const limit = req.query.limit;
@@ -104,6 +105,9 @@ router.get('/', async (req, res, next) => {
     const sort = req.query.sort; // /apiv1/flits?sort=date%20name // /apiv1/flits?sort=-date%20name
 
     const filtro = {};
+    // if(date){
+    //   filtro.date= req.query.exactAuthor;
+    // }
     if (exactAuthor) {
       filtro.author = req.query.exactAuthor;
     }
