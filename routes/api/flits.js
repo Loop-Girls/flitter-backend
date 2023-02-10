@@ -200,7 +200,7 @@ router.delete('/:id', async (req, res, next) => {
     }
 
     await Flit.deleteOne({ _id: id });
-
+    //TODO: delete img from folder if flit has an image.
     res.json();
 
   } catch (err) {
