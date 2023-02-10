@@ -7,12 +7,12 @@ const Comment = require('./Comment')
 
 // define flits schema
 const flitsSchema = mongoose.Schema({
-  author: { type: String, index: true, required: true },
-  image: { type: String, index: true },
-  message: { type: String, index: true },
-  date: {type: Date,index: true, required:true}, //TODO: change type to Date?
-  kudos: { type: [User.schema], index: true },
-  comments: { type: [Comment.schema], index: true },
+  author: { type: String, required: true },
+  image: { type: String},
+  message: { type: String },
+  date: {type: Date, required:true}, 
+  kudos: { type: [String] },//TODO: change type to reference to Users?
+  comments: { type: [Comment.schema]}, //index
 });
 
 flitsSchema.statics.lista = function (filtro, skip, limit, campos, sort) {
@@ -20,7 +20,7 @@ flitsSchema.statics.lista = function (filtro, skip, limit, campos, sort) {
   query.skip(skip);
   query.limit(limit);
   query.select(campos);
-  query.sort(sort);
+  query.sort({'date': -1});
   return query.exec() // here the query is executed and a promise is returned
 }
 /**

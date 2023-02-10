@@ -5,11 +5,11 @@ const User = require('./User')
 
 // define comment schema
 const commentsSchema = mongoose.Schema({
-    author:   {type: String, index: true, required: true} ,
-    image:    {type: String, index: true} ,
-    message:   {type: String, index: true},
-    date: {type: Date, index: true, required: true},
-    kudos:    {type: [User.schema], index: true},
+    author:   {type: String, required: true} ,
+    image:    {type: String} ,
+    message:   {type: String},
+    date: {type: Date, required: true},
+    kudos:    {type: [String]},
 });
 
 commentsSchema.statics.lista = function (filtro, skip, limit, campos, sort) {
