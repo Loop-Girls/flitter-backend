@@ -57,15 +57,14 @@ app.use('/', require('./routes/index'));
 
 app.use(cors());
 // Route to flits
-app.use('/apiv1/flits', flitsRouter);
+app.use('/apiv1/flits', flitsRouter); // crear ruta al backend de flits
 app.use('/images/flits', express.static('public'));
 app.use('/static', express.static(path.join(__dirname, 'public')))
 
 app.use('/apiv1/users', usersRouter);
 
 //route to auth
-app.use('apiv1/auth', authRouter);
-
+app.use('/apiv1/auth', authRouter); //crear ruta al backend de auth
 
 /**
  * Error handlers

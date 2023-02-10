@@ -10,7 +10,7 @@ const router = express.Router();
 //handle errors
 const handleErrors = (err) => {
     console.log(err.message, err.code);
-    let errors = { email: '', password: '' }
+    let errors = { email: '', password: '', username: ''}
 
     //incorrect email
     if(err.message === 'incorrect email'){
@@ -19,7 +19,12 @@ const handleErrors = (err) => {
 
     //duplicate error code
     if (err.code === 11000) {
-        errors.email = 'That email is already registered'
+        if(err.message.includes('username')){
+            errors.username = 'That username is already registered'
+        }else{
+            errors.email= 'That email is already registered'
+        }
+        
         return errors;
     }
 
@@ -65,20 +70,5 @@ router.post('/signup', async (req, res, next) => {
     }
 });
 
-//login
-router.post('/login', async (req, res, next) => {
-    const {email, password}= req.body;
-    try {
-        const user = await User.login(email, password);
-        //create token and return it in a cookie
-        const token = createToken(user._id);
-        res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge});
-        res.status(200).json({user:user._id});
-        
-    } catch (err) {
-        const errors = handleErrors(err);
-        res.status(400).json({ errors });
-    }
-});
 
 module.exports = router;
