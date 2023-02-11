@@ -5,7 +5,7 @@ const User = require('../../models/User');
 /* GET users listing. */
 
 
-// PUT /apiv1/users/(id) (body=agenteData)
+// PUT /apiv1/users/(id) (body=userData)
 // Update a user
 router.put('/:id', async (req, res, next) => {
   try {
@@ -17,6 +17,49 @@ router.put('/:id', async (req, res, next) => {
       new: true
     });
     res.json({ updateUser });
+
+  } catch (err) {
+    next(err);
+  }
+});
+router.put('/follow/id/:id', async (req, res, next) => {
+  try {
+
+    const id = req.params.id;
+    const userData = req.body.following;
+    console.log(userData);
+
+    const updateUser = await User.findOneAndUpdate({_id: id},{ $push: { following: userData} }, {
+      new: true
+    });
+    // res.json({ updateUser });
+
+    const updateUser2 = await User.findOneAndUpdate({username: userData},{ $push: { followers: updateUser.username} }, {
+      new: true
+    });
+    res.json({ updateUser,updateUser2 });
+
+  } catch (err) {
+    next(err);
+  }
+});
+router.put('/unfollow/id/:id', async (req, res, next) => {
+  try {
+
+    const id = req.params.id;
+    const userData = req.body.following;
+    console.log('userdata' + userData);
+
+    const updateUser = await User.findOneAndUpdate({_id: id},{ $pull: { following: userData} }, {
+      new: true
+    });
+    // res.json({ updateUser });
+
+    const updateUser2 = await User.findOneAndUpdate({username: userData},{ $pull: { followers: updateUser.username} }, {
+      new: true
+    });
+    //return user to update loggedUser in front
+    res.json({ updateUser});
 
   } catch (err) {
     next(err);

@@ -83,6 +83,20 @@ router.post('/login', async (req, res, next) => {
         res.status(400).json({ errors });
     }
 });
+router.get('/profile/:id', async (req, res, next) => {
+    try {
+
+        const id = req.params.id;
+  
+        // Search for an ad in database
+        const user = await User.findById(id);
+  
+        res.json({ user });
+  
+    } catch (err) {
+        next(err);
+    }
+});
 
 
 module.exports = router;

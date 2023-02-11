@@ -19,8 +19,8 @@ const usersSchema = mongoose.Schema({
   },// validate it is an email: npm install validator ,
   password: { type: String, required: true, minLength: [6, 'Password must be at least 6 characters length'],},
   avatar: { type: String},
-  followers: { type: [Follower.Schema] },
-  following: { type: [Follower.Schema] },
+  followers: { type: [String] }, //TODO: change to ref User
+  following: { type: [String] },
 
 });
 
