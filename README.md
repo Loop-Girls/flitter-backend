@@ -192,5 +192,17 @@ DELETE /apiv1/flits/:id
 Update a flit:
 
 ```
-PUT /apiv1/flits/(id) (body=agenteData)
+PUT /apiv1/flits/(id) (body=flitData)
+```
+
+Create a flit:
+
+```
+POST /apiv1/flits/post (body[form-data]=flitData)
+```
+
+Auth signup:
+
+```
+POST /apiv1/auth/signup (body=userData)
 ```
