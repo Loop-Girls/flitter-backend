@@ -3,7 +3,7 @@
         {
             "email": "firstUser@fakemail.com",
             "password": "123456",
-            "username": "kyl",
+            "username": "Bea",
             "role": "user",
             "avatar":""
       
@@ -11,7 +11,7 @@
         {
             "email": "firstUser2@fakemail.com",
             "password": "123456",
-            "username": "FlitterFan",
+            "username": "Andrea",
             "role": "user",
             "avatar":""
       
@@ -19,7 +19,23 @@
         {
             "email": "firstUser3@fakemail.com",
             "password": "123456",
-            "username": "Nauel",
+            "username": "Steff",
+            "role": "user",
+            "avatar":""
+      
+        },
+        {
+            "email": "firstUser6@fakemail.com",
+            "password": "123456",
+            "username": "Cristina",
+            "role": "user",
+            "avatar":""
+      
+        },
+        {
+            "email": "firstUser7@fakemail.com",
+            "password": "123456",
+            "username": "Karen",
             "role": "user",
             "avatar":""
       

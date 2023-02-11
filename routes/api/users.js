@@ -5,8 +5,8 @@ const User = require('../../models/User');
 /* GET users listing. */
 
 
-// PUT /apiv1/flips/(id) (body=agenteData)
-// Update a flip
+// PUT /apiv1/users/(id) (body=agenteData)
+// Update a user
 router.put('/:id', async (req, res, next) => {
   try {
 

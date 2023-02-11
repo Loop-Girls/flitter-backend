@@ -57,12 +57,11 @@ router.post('/signup', async (req, res, next) => {
         const user = new User(adData);
         const token = createToken(user._id);
         res.cookie('jwt',token,{httpOnly:true, maxAge: maxAge*1000}); //returns cookie
+
         // save it in de database
         const savedUser = await user.save();
 
-        // res.json({ result: savedUser });
-        // }
-        res.status(201).json({user: savedUser._id}); //return user id
+        res.status(201).json(savedUser); //return token
         
     } catch (err) {
         const errors = handleErrors(err);
