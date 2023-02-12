@@ -61,7 +61,7 @@ router.post('/signup', async (req, res, next) => {
         // save it in de database
         const savedUser = await user.save();
 
-        res.status(201).json(savedUser); //return token
+        res.status(201).json({savedUser, token}); //return token
         
     } catch (err) {
         const errors = handleErrors(err);
@@ -76,7 +76,7 @@ router.post('/login', async (req, res, next) => {
         //create token and return it in a cookie
         const token = createToken(user._id);
         res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge});
-        res.status(200).json(user);
+        res.status(200).json({user, token});
         
     } catch (err) {
         const errors = handleErrors(err);
@@ -91,7 +91,7 @@ router.get('/profile/:id', async (req, res, next) => {
         // Search for an ad in database
         const user = await User.findById(id);
   
-        res.json({ user });
+        res.send(user);
   
     } catch (err) {
         next(err);

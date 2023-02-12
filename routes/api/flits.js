@@ -211,4 +211,39 @@ router.delete('/:id', async (req, res, next) => {
   }
 });
 
+router.put('/kudos/give/id/:id', async (req, res, next) => {
+  try {
+
+    const id = req.params.id;
+    const userData = req.body.kudos;
+    console.log(userData);
+
+    const updateFlit = await Flit.findOneAndUpdate({_id: id},{ $push: { kudos: userData} }, {
+      new: true
+    });
+    // res.json({ updateUser });
+    res.json({ updateFlit });
+
+  } catch (err) {
+    next(err);
+  }
+});
+router.put('/kudos/remove/id/:id', async (req, res, next) => {
+  try {
+
+    const id = req.params.id;
+    const userData = req.body.kudos;
+    console.log(userData);
+
+    const updateFlit = await Flit.findOneAndUpdate({_id: id},{ $pull: { kudos: userData} }, {
+      new: true
+    });
+    // res.json({ updateUser });
+    res.json({ updateFlit });
+
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;

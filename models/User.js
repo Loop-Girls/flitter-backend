@@ -55,7 +55,6 @@ usersSchema.statics.cargaJson = async function (fichero) {
 
 };
 
-
 //fire a function before doc saved to db
 usersSchema.pre('save', async function (next) {
   // console.log('user about to be created and saved', this)
