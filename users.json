@@ -1,64 +1,102 @@
 {
     "users": [
-        {
-            "email": "firstUser@fakemail.com",
-            "password": "123456",
-            "username": "Bea",
-            "role": "user",
-            "avatar":"",
-            "following": ["Andrea", "Bob esponja"],
-            "followers": ["Karen", "Bob esponja"]
-      
-        },
-        {
-            "email": "firstUser2@fakemail.com",
-            "password": "123456",
-            "username": "Andrea",
-            "role": "user",
-            "avatar":"",
-            "following": ["Steff", "Bob esponja"],
-            "followers": ["Bea", "Bob esponja"]
-      
-        },
-        {
-            "email": "firstUser3@fakemail.com",
-            "password": "123456",
-            "username": "Steff",
-            "role": "user",
-            "avatar":"",
-            "following": ["Cristina", "Bob esponja"],
-            "followers": ["Andrea", "Bob esponja"]
-      
-        },
-        {
-            "email": "firstUser6@fakemail.com",
-            "password": "123456",
-            "username": "Cristina",
-            "role": "user",
-            "avatar":"",
-            "following": ["Karen", "Bob esponja"],
-            "followers": ["Steff", "Bob esponja"]
-      
-        },
-        {
-            "email": "firstUser7@fakemail.com",
-            "password": "123456",
-            "username": "Karen",
-            "role": "user",
-            "avatar":"",
-            "following": ["Bea", "Bob esponja"],
-            "followers": ["Cristina"]
-      
-        },
-        {
-            "email": "bobesponja@fakemail.com",
-            "password": "123456",
-            "username": "Bob esponja",
-            "role": "user",
-            "avatar":"",
-            "following": ["Bea", "Andrea", "Steff", "Cristina", "Karen"],
-            "followers": ["Bea", "Andrea", "Steff", "Cristina", "Karen"]
-      
-        }
-    ]
+            {
+                "_id": "63e80dfdea52a015081a60f9",
+                "username": "Bea",
+                "email": "firstuser@fakemail.com",
+                "password": "123456",
+                "avatar": "",
+                "followers": [
+                    "Karen"
+                ],
+                "following": [
+                    "Andrea",
+                    "Bob esponja"
+                ],
+                "__v": 0
+            },
+            {
+                "_id": "63e80dfdea52a015081a60fb",
+                "username": "Andrea",
+                "email": "firstuser2@fakemail.com",
+                "password": "123456",
+                "avatar": "",
+                "followers": [
+                    "Bea"
+                ],
+                "following": [
+                    "Steff",
+                    "Bob esponja"
+                ],
+                "__v": 0
+            },
+            {
+                "_id": "63e80dfdea52a015081a60fd",
+                "username": "Steff",
+                "email": "firstuser3@fakemail.com",
+                "password": "123456",
+                "avatar": "",
+                "followers": [
+                    "Andrea"
+                ],
+                "following": [
+                    "Cristina",
+                    "Bob esponja"
+                ],
+                "__v": 0
+            },
+            {
+                "_id": "63e80dfdea52a015081a60ff",
+                "username": "Cristina",
+                "email": "firstuser6@fakemail.com",
+                "password": "123456",
+                "avatar": "",
+                "followers": [
+                    "Steff",
+                    "Bob esponja"
+                ],
+                "following": [
+                    "Karen",
+                    "Bob esponja"
+                ],
+                "__v": 0
+            },
+            {
+                "_id": "63e80dfdea52a015081a6101",
+                "username": "Karen",
+                "email": "firstuser7@fakemail.com",
+                "password": "123456",
+                "avatar": "",
+                "followers": [
+                    "Cristina"
+                ],
+                "following": [
+                    "Bea",
+                    "Bob esponja"
+                ],
+                "__v": 0
+            },
+            {
+                "_id": "63e80dfdea52a015081a6103",
+                "username": "Bob esponja",
+                "email": "bobesponja@fakemail.com",
+                "password": "123456",
+                "avatar": "",
+                "followers": [
+                    "Bea",
+                    "Andrea",
+                    "Steff",
+                    "Cristina",
+                    "Karen"
+                ],
+                "following": [
+                    "Bea",
+                    "Andrea",
+                    "Steff",
+                    "Cristina",
+                    "Karen"
+                ],
+                "__v": 0
+            }
+        ]
 }
