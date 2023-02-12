@@ -4,6 +4,7 @@ const express = require('express');
 const createError = require('http-errors');
 const Flit = require('../../models/Flit');
 const multer = require('../../config/multer');
+const Users = require('../../models/User');
 const router = express.Router();
 const imageRoute = 'http://localhost:3000/images/flits/'
 
@@ -17,8 +18,8 @@ const imageRoute = 'http://localhost:3000/images/flits/'
 router.post('/post', multer.single("imagen"), async function (req, res, next) {
   console.log(req.file);
   console.log(req.body);
-  if (req.body.message == undefined && req.file == undefined || req.body.message=='' && req.file == undefined) {
-    res.status(400).json({ error:"Can't post a flit without any message or picture." });
+  if (req.body.message == undefined && req.file == undefined || req.body.message == '' && req.file == undefined) {
+    res.status(400).json({ error: "Can't post a flit without any message or picture." });
   } else {
     let image = '';
     if (req.file) {
@@ -37,7 +38,7 @@ router.post('/post', multer.single("imagen"), async function (req, res, next) {
       res.json({ result: savedFlit });
     } catch (error) {
       console.log(error);
-      res.status(400).json({ error:"Can't post a flit without any message or picture." });
+      res.status(400).json({ error: "Can't post a flit without any message or picture." });
     }
   }
 
@@ -46,27 +47,9 @@ router.post('/post', multer.single("imagen"), async function (req, res, next) {
 
 
 });
-// router.post('/post', async (req, res, next) => {
-//   try {
-
-//     const adData = req.body;
-//     // instanciate new ad in the memory
-//     const flit = new Flit(adData);
-
-//     // save it in de database
-//     const savedFlit = await flit.save();
-
-//     res.json({ result: savedFlit });
-//     // }
-
-
-//   } catch (err) {
-//     next(err);
-//   }
-// });
 
 // PUT /apiv1/flits/(id) (body=agenteData)
-// Update a flip
+// Update a flit
 router.put('/:id', async (req, res, next) => {
   try {
 
@@ -103,21 +86,41 @@ router.get('/', async (req, res, next) => {
     const fields = req.query.fields; // /apiv1/flits?fields=name -_id
     // sort
     const sort = req.query.sort; // /apiv1/flits?sort=date%20name // /apiv1/flits?sort=-date%20name
-
+    const following = req.query.following;
     const filtro = {};
     // if(date){
     //   filtro.date= req.query.exactAuthor;
     // }
     if (exactAuthor) {
       filtro.author = req.query.exactAuthor;
+
+    }
+    if (author) {// /apiv1/flits?author=Karen,Steff
+      if (author.includes(',')) {
+        console.log('includes ,')
+        let authorFilter = [];
+        let authors = author.split(',');
+        console.log(authors);
+        authors.forEach(element => {
+          authorFilter.push(
+            {
+              "author": element
+            }
+          )
+        });
+        console.log(authorFilter);
+        filtro.author = { '$or': authorFilter }
+      } else {// 1 tag query /apiv1/flits?author=Karen
+        filtro.author = { '$in': author };
+      }
     }
 
-    if (author) { // /apiv1/flits?author=k
-      // search for a product that it starts with those letters
-      filtro.author = new RegExp('^' + req.query.author, "i");;
-    }
+    // if (author) { // /apiv1/flits?author=k
+    //   // search for a flit that it starts with those letters
+    //   filtro.author = new RegExp('^' + req.query.author, "i");;
+    // }
     if (message) { // /apiv1/flits?message=h
-      // search for a product that it starts with those letters
+      // search for a flit that it starts with those letters
       filtro.message = new RegExp('^' + req.query.message, "i");;
     }
 
@@ -165,7 +168,36 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-//TODO: get all flits from following
+//TODO: add to general get all flits and remove this one.
+router.get('/private', async (req, res, next) => {
+  // filters
+  // pagination /apiv1/flits?skip=1&limit=1
+  const skip = req.query.skip;
+  const limit = req.query.limit;
+  // fields selection
+  const fields = req.query.fields; // /apiv1/flits?fields=name -_id
+  // sort
+  const sort = req.query.sort; // /apiv1/flits?sort=date%20name // /apiv1/flits?sort=-date%20name
+
+  const author = req.query.author;
+  console.log('includes ,')
+  let authorFilter = [];
+  let authors = author.split(',');
+  console.log(authors);
+  authors.forEach(element => {
+    authorFilter.push(
+      {
+        "author": element
+      }
+    )
+  });
+  console.log(authorFilter);
+  let filtro = { '$or': authorFilter }
+
+  const flits = await Flit.listaFollowing(filtro, skip, limit, fields, sort);
+  res.json(flits);;
+});
+
 
 
 // GET /apiv1/flits/(id)
@@ -218,7 +250,7 @@ router.put('/kudos/give/id/:id', async (req, res, next) => {
     const userData = req.body.kudos;
     console.log(userData);
 
-    const updateFlit = await Flit.findOneAndUpdate({_id: id},{ $push: { kudos: userData} }, {
+    const updateFlit = await Flit.findOneAndUpdate({ _id: id }, { $push: { kudos: userData } }, {
       new: true
     });
     // res.json({ updateUser });
@@ -235,7 +267,7 @@ router.put('/kudos/remove/id/:id', async (req, res, next) => {
     const userData = req.body.kudos;
     console.log(userData);
 
-    const updateFlit = await Flit.findOneAndUpdate({_id: id},{ $pull: { kudos: userData} }, {
+    const updateFlit = await Flit.findOneAndUpdate({ _id: id }, { $pull: { kudos: userData } }, {
       new: true
     });
     // res.json({ updateUser });

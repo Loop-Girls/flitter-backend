@@ -23,6 +23,14 @@ flitsSchema.statics.lista = function (filtro, skip, limit, campos, sort) {
   query.sort({'date': -1});
   return query.exec() // here the query is executed and a promise is returned
 }
+flitsSchema.statics.listaFollowing = function (filtro, skip, limit, campos, sort) {
+  const query = Flits.find(filtro);
+  query.skip(skip);
+  query.limit(limit);
+  query.select(campos);
+  query.sort({'date': -1});
+  return query.exec() // here the query is executed and a promise is returned
+}
 /**
  * load a json of flits
  */

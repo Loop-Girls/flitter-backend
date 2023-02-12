@@ -97,6 +97,23 @@
                     "Karen"
                 ],
                 "__v": 0
+            },
+            {
+                "username": "kas",
+                "email": "kas@flitter.com",
+                "password": "123456",
+                "avatar": "",
+                "followers": [
+                    "Bea",
+                    "Andrea",
+                    "Steff",
+                    "Cristina",
+                    "Karen"
+                ],
+                "following": [
+                    "Bob esponja"
+                ],
+                "__v": 0
             }
         ]
 }
