@@ -123,17 +123,17 @@ router.get('/', async (req, res, next) => {
       // search for a flit that it starts with those letters
       //filtro.message = new RegExp('^' + req.query.message, "i");
       //contains
-      filtro.message=  new RegExp(req.query.message, "i") ;
-  
+      filtro.message = new RegExp(req.query.message, "i");
+
     }
-    
+
     if (image) {// /apiv1/flits?image=false
       filtro.image = image.toLocaleLowerCase();
-    
+
     }
-      let currentDate = new Date().toISOString();
-      filtro.date =  { $lte: currentDate };
-    
+    let currentDate = new Date().toISOString();
+    filtro.date = { $lte: currentDate };
+
     //TODO: maybe
     //   if (tag) {// /apiv1/ads?tags=lifestyle,work
     //     if (tag.includes(',')) {
@@ -178,6 +178,7 @@ router.get('/', async (req, res, next) => {
 router.get('/private', async (req, res, next) => {
   // filters
   // pagination /apiv1/flits?skip=1&limit=1
+  const date = req.query.date;
   const skip = req.query.skip;
   const limit = req.query.limit;
   // fields selection
@@ -186,6 +187,7 @@ router.get('/private', async (req, res, next) => {
   const sort = req.query.sort; // /apiv1/flits?sort=date%20name // /apiv1/flits?sort=-date%20name
 
   const author = req.query.author;
+  let filtro = {};
   console.log('includes ,')
   let authorFilter = [];
   let authors = author.split(',');
@@ -197,11 +199,21 @@ router.get('/private', async (req, res, next) => {
       }
     )
   });
+  let currentDate = new Date().toISOString();
+  filtro.date = { $lte: currentDate };
   console.log(authorFilter);
-  let filtro = { '$or': authorFilter }
+  // filtro = { '$or': authorFilter}
 
-  const flits = await Flit.listaFollowing(filtro, skip, limit, fields, sort);
-  res.json(flits);;
+  filtro.date = { $lte: currentDate };
+  filtro = {
+    $and: [
+      { $or: authorFilter },
+      { $or: [{ date: { $lte: currentDate } }] }
+    ]
+  }
+  let flits = await Flit.listaFollowing(filtro, skip, limit, fields, sort);
+
+  res.json(flits);
 });
 
 
