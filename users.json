@@ -1,119 +1,112 @@
 {
     "users": [
-            {
-                "_id": "63e80dfdea52a015081a60f9",
-                "username": "Bea",
-                "email": "firstuser@fakemail.com",
-                "password": "123456",
-                "avatar": "",
-                "followers": [
-                    "Karen"
-                ],
-                "following": [
-                    "Andrea",
-                    "Bob esponja"
-                ],
-                "__v": 0
-            },
-            {
-                "_id": "63e80dfdea52a015081a60fb",
-                "username": "Andrea",
-                "email": "firstuser2@fakemail.com",
-                "password": "123456",
-                "avatar": "",
-                "followers": [
-                    "Bea"
-                ],
-                "following": [
-                    "Steff",
-                    "Bob esponja"
-                ],
-                "__v": 0
-            },
-            {
-                "_id": "63e80dfdea52a015081a60fd",
-                "username": "Steff",
-                "email": "firstuser3@fakemail.com",
-                "password": "123456",
-                "avatar": "",
-                "followers": [
-                    "Andrea"
-                ],
-                "following": [
-                    "Cristina",
-                    "Bob esponja"
-                ],
-                "__v": 0
-            },
-            {
-                "_id": "63e80dfdea52a015081a60ff",
-                "username": "Cristina",
-                "email": "firstuser6@fakemail.com",
-                "password": "123456",
-                "avatar": "",
-                "followers": [
-                    "Steff",
-                    "Bob esponja"
-                ],
-                "following": [
-                    "Karen",
-                    "Bob esponja"
-                ],
-                "__v": 0
-            },
-            {
-                "_id": "63e80dfdea52a015081a6101",
-                "username": "Karen",
-                "email": "firstuser7@fakemail.com",
-                "password": "123456",
-                "avatar": "",
-                "followers": [
-                    "Cristina"
-                ],
-                "following": [
-                    "Bea",
-                    "Bob esponja"
-                ],
-                "__v": 0
-            },
-            {
-                "_id": "63e80dfdea52a015081a6103",
-                "username": "Bob esponja",
-                "email": "bobesponja@fakemail.com",
-                "password": "123456",
-                "avatar": "",
-                "followers": [
-                    "Bea",
-                    "Andrea",
-                    "Steff",
-                    "Cristina",
-                    "Karen"
-                ],
-                "following": [
-                    "Bea",
-                    "Andrea",
-                    "Steff",
-                    "Cristina",
-                    "Karen"
-                ],
-                "__v": 0
-            },
-            {
-                "username": "kas",
-                "email": "kas@flitter.com",
-                "password": "123456",
-                "avatar": "",
-                "followers": [
-                    "Bea",
-                    "Andrea",
-                    "Steff",
-                    "Cristina",
-                    "Karen"
-                ],
-                "following": [
-                    "Bob esponja"
-                ],
-                "__v": 0
-            }
-        ]
+        {
+            "_id": "63e80dfdea52a015081a60f9",
+            "username": "Bea",
+            "email": "firstuser@fakemail.com",
+            "password": "123456",
+            "avatar": "",
+            "followers": [
+                "Karen"
+            ],
+            "following": [
+                "Andrea",
+                "Bob esponja"
+            ]
+        },
+        {
+            "_id": "63e80dfdea52a015081a60fb",
+            "username": "Andrea",
+            "email": "firstuser2@fakemail.com",
+            "password": "123456",
+            "avatar": "",
+            "followers": [
+                "Bea"
+            ],
+            "following": [
+                "Steff",
+                "Bob esponja"
+            ]
+        },
+        {
+            "_id": "63e80dfdea52a015081a60fd",
+            "username": "Steff",
+            "email": "firstuser3@fakemail.com",
+            "password": "123456",
+            "avatar": "",
+            "followers": [
+                "Andrea"
+            ],
+            "following": [
+                "Cristina",
+                "Bob esponja"
+            ]
+        },
+        {
+            "_id": "63e80dfdea52a015081a60ff",
+            "username": "Cristina",
+            "email": "firstuser6@fakemail.com",
+            "password": "123456",
+            "avatar": "",
+            "followers": [
+                "Steff",
+                "Bob esponja"
+            ],
+            "following": [
+                "Karen",
+                "Bob esponja"
+            ]
+        },
+        {
+            "_id": "63e80dfdea52a015081a6101",
+            "username": "Karen",
+            "email": "firstuser7@fakemail.com",
+            "password": "123456",
+            "avatar": "",
+            "followers": [
+                "Cristina"
+            ],
+            "following": [
+                "Bea",
+                "Bob esponja"
+            ]
+        },
+        {
+            "_id": "63e80dfdea52a015081a6103",
+            "username": "Bob esponja",
+            "email": "bobesponja@fakemail.com",
+            "password": "123456",
+            "avatar": "",
+            "followers": [
+                "Bea",
+                "Andrea",
+                "Steff",
+                "Cristina",
+                "Karen"
+            ],
+            "following": [
+                "Bea",
+                "Andrea",
+                "Steff",
+                "Cristina",
+                "Karen"
+            ]
+        },
+        {
+            "_id": "63e909ed1687d3011c085310",
+            "username": "kas",
+            "email": "kas@flitter.com",
+            "password": "123456",
+            "avatar": "",
+            "followers": [
+                "Bea",
+                "Andrea",
+                "Steff",
+                "Cristina",
+                "Karen"
+            ],
+            "following": [
+            ]
+        }
+    ]
 }

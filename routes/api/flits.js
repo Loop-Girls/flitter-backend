@@ -121,9 +121,12 @@ router.get('/', async (req, res, next) => {
     // }
     if (message) { // /apiv1/flits?message=h
       // search for a flit that it starts with those letters
-      filtro.message = new RegExp('^' + req.query.message, "i");;
+      //filtro.message = new RegExp('^' + req.query.message, "i");
+      //contains
+      filtro.message=  new RegExp(req.query.message, "i") ;
+  
     }
-
+    
     if (image) {// /apiv1/flits?image=false
       filtro.image = image.toLocaleLowerCase();
     }
