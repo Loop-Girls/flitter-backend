@@ -129,8 +129,11 @@ router.get('/', async (req, res, next) => {
     
     if (image) {// /apiv1/flits?image=false
       filtro.image = image.toLocaleLowerCase();
+    
     }
-
+      let currentDate = new Date().toISOString();
+      filtro.date =  { $lte: currentDate };
+    
     //TODO: maybe
     //   if (tag) {// /apiv1/ads?tags=lifestyle,work
     //     if (tag.includes(',')) {
