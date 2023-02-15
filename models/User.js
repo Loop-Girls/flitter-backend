@@ -75,6 +75,7 @@ usersSchema.statics.login = async function (email, password) {
     if (auth) {
       return user;
     }
+    return null;
     throw Error('incorrect password'); //change to credentials
   }
   throw Error("incorrect email"); //change to credencials

@@ -124,6 +124,7 @@ router.delete('/:id', async (req, res, next) => {
     const id = req.params.id;
 
     const user = await User.findById(id);
+    const username = user.username;
 
     if (!user) {
       
