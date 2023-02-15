@@ -107,6 +107,34 @@
             ],
             "following": [
             ]
+        },
+        {
+            "username": "Vetusta Morla",
+            "email": "Vetusta@fakemail.com",
+            "password": "123456",
+            "avatar": "",
+            "followers": [
+                "Cristina"
+            ],
+            "following": [
+                "Bea",
+                "Bob esponja"
+            ]
+        },
+        {
+            "username": "Dora la Exploradora",
+            "email": "dora@fakemail.com",
+            "password": "123456",
+            "avatar": "",
+            "followers": [
+                "Steff",
+                "Bob esponja",
+                "Vetusta Morla"
+            ],
+            "following": [
+                "Karen",
+                "Bob esponja"
+            ]
         }
     ]
 }

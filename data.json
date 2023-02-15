@@ -93,8 +93,9 @@
         },
         {
             "author": "Bob esponja",
+            "image":"http://localhost:3000/images/flits/bobEsponja.jpg",
             "message": "vivo en una piña debajo del mar",
-            "date": "2023-03-07",
+            "date": "2023-02-07",
             "kudos": [],
             "comments": [],
             "__v": 0
@@ -103,6 +104,24 @@
             "author": "kas",
             "message": "Un buen back-end es como Batman; parece que no, pero siempre está ahí.",
             "date": "2022-11-07",
+            "kudos": [],
+            "comments": [],
+            "__v": 0
+        },
+        {
+            "author": "Vetusta Morla",
+            "image": "http://localhost:3000/images/flits/emperador.jpg",
+            "message": "El futuro se vistió Con el traje nuevo del emperador¿Quién iba a decir que sin carbón...No hay reyes magos?",
+            "date": "2023-02-14",
+            "kudos": [],
+            "comments": [],
+            "__v": 0
+        },
+        {
+            "author": "Dora la Exploradora",
+            "image": "http://localhost:3000/images/flits/dora.jpg",
+            "message": "Lo hicimos!!!",
+            "date": "2023-02-15",
             "kudos": [],
             "comments": [],
             "__v": 0
