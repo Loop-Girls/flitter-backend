@@ -27,8 +27,16 @@
         },
         {
             "author": "Cristina",
-            "message": "flit from postman 2",
-            "date": "Wed Feb 01 2023 18:00:00 GMT-0600 (hora estándar central)",
+            "message": "Sin café no soy persona, soy un gremlin recién mojado.",
+            "date": "2022-12-25",
+            "kudos": [],
+            "comments": [],
+            "__v": 0
+        },
+        {
+            "author": "Cristina",
+            "message": "Un programador no llora cuando nace dice: 'HOLA MUNDO'.",
+            "date": "2023-02-26",
             "kudos": [],
             "comments": [],
             "__v": 0
@@ -36,6 +44,14 @@
         {
             "author": "Steff",
             "message": "A day without sunshine is like, you know, night.",
+            "date": "2023-02-02",
+            "kudos": [],
+            "comments": [],
+            "__v": 0
+        },
+        {
+            "author": "Steff",
+            "message": "If you give up today, yesterday's effort was useless!",
             "date": "2023-02-02",
             "kudos": [],
             "comments": [],
@@ -51,7 +67,7 @@
         },
         {
             "author": "Bea",
-            "message": "flit from postman 5",
+            "message": "Tengo más hambre que el tamagochi de un sordo.",
             "date": "2023-02-07",
             "kudos": [],
             "comments": [],
@@ -83,7 +99,7 @@
             "__v": 0
         },
         {
-            "author": "Señor Joker",
+            "author": "Karen",
             "message": "Si no estuviera tan loca pensaría que está chiflada.",
             "date": "2023-02-11",
             "kudos": [],
