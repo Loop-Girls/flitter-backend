@@ -113,6 +113,15 @@
             "kudos": [],
             "comments": [],
             "__v": 0
+        },
+        {
+            "author": "estef",
+            "image": "http://localhost:3000/images/flits/1676403196284.jpg",
+            "message": "Estoy hasta el moño",
+            "date": "2023-15-02",
+            "kudos": [],
+            "comments": [],
+            "__v": 0
         }
     ]
 }
