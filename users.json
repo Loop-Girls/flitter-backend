@@ -134,6 +134,31 @@
                 "Bea",
                 "Karen"
             ]
+        },
+        {
+            "username": "Vetusta Morla",
+            "email": "vetusta@fake.com",
+            "password": "123456",
+            "avatar": "",
+            "followers": [],
+            "following": [
+                "Bea",
+                "Karen",
+                "Bob esponja"
+            ]
+        },
+        {
+            "username": "Dora la Exploradora",
+            "email": "dora@fake.com",
+            "password": "123456",
+            "avatar": "",
+            "followers": [],
+            "following": [
+                "Bea",
+                "Karen",
+                "Bob esponja",
+                "Vetusta Morla"
+            ]
         }
     ]
 }
