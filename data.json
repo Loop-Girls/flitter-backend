@@ -2,14 +2,14 @@
     "flits": [
         {
             "author": "Karen",
-            "message": "Hello, this is my flit 2",
+            "message": "Ante la duda siempre pregunta. Preguntar es de sabios.",
             "date": "2023-02-02",
             "kudos": [
             ],
             "comments": [
                 {
                     "author": "Bea",
-                    "image": "http://localhost:3000/images/flits/bici.png",
+                    "image": "http://localhost:3000/images/flits/meme01.jpg",
                     "message": "Welcome!",
                     "date": "2023-02-02",
                     "kudos": [],
@@ -19,7 +19,7 @@
         },
         {
             "author": "Andrea",
-            "message": "flit from postman",
+            "message": "Be nice to nerds, you might end up working for them.",
             "date": "2023-02-02",
             "kudos": [],
             "comments": [],
@@ -35,7 +35,7 @@
         },
         {
             "author": "Steff",
-            "message": "flit from postman 3",
+            "message": "A day without sunshine is like, you know, night.",
             "date": "2023-02-02",
             "kudos": [],
             "comments": [],
@@ -43,7 +43,7 @@
         },
         {
             "author": "Bea",
-            "message": "flit from postman 4",
+            "message": "Odio programar, Odio programar, Odio programar. Espera, FUNCIONA!!! Me encanta programar!!",
             "date": "2023-02-06",
             "kudos": [],
             "comments": [],
@@ -68,8 +68,7 @@
         },
         {
             "author": "Bea",
-            "image": "http://localhost:3000/images/flits/bici.png",
-            "message": "flit from postman 7",
+            "image": "http://localhost:3000/images/flits/meme01.jpg",
             "date": "2023-02-09",
             "kudos": [],
             "comments": [],
@@ -77,15 +76,15 @@
         },
         {
             "author": "Bea",
-            "message": "flit from postman 8",
+            "message": "Everyone should love waffles. If they don't, they're crazy",
             "date": "2023-02-10",
             "kudos": [],
             "comments": [],
             "__v": 0
         },
         {
-            "author": "Bea",
-            "message": "flit from postman 9",
+            "author": "Señor Joker",
+            "message": "Si no estuviera tan loca pensaría que está chiflada.",
             "date": "2023-02-11",
             "kudos": [],
             "comments": [],
@@ -102,7 +101,15 @@
         {
             "author": "kas",
             "message": "Un buen back-end es como Batman; parece que no, pero siempre está ahí.",
-            "date": "2022-11-07",
+            "date": "2023-02-15",
+            "kudos": [],
+            "comments": [],
+            "__v": 0
+        },
+        {
+            "author": "nauel",
+            "message": "Truth can only be found in one place: the code.",
+            "date": "2023-02-15",
             "kudos": [],
             "comments": [],
             "__v": 0

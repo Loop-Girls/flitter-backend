@@ -107,6 +107,22 @@
             ],
             "following": [
             ]
+        },
+        {
+            "username": "nauel",
+            "email": "nauel@flitter.com",
+            "password": "123456",
+            "avatar": "",
+            "followers": [
+                "Bea",
+                "Andrea",
+                "Steff",
+                "Cristina",
+                "Karen",
+                "kas"
+            ],
+            "following": [
+            ]
         }
     ]
 }
