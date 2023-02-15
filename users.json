@@ -128,6 +128,7 @@
             "username": "estef",
             "email": "estef@fake.com",
             "password": "$2b$10$jMIsun9yaW2sq96PbrEUXOoX6GB6TIaOHcbNWiY6BjvmzxuZKhsEu",
+            "avatar": "",
             "followers": [],
             "following": [
                 "Bea",
