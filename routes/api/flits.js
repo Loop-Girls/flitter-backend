@@ -83,9 +83,9 @@ router.get('/', async (req, res, next) => {
     const skip = req.query.skip;
     const limit = req.query.limit;
     // fields selection
-    const fields = req.query.fields; // /apiv1/flits?fields=name -_id
+    const fields = req.query.fields; // /apiv1/flits/?fields=name -_id
     // sort
-    const sort = req.query.sort; // /apiv1/flits?sort=date%20name // /apiv1/flits?sort=-date%20name
+    const sort = req.query.sort; // /apiv1/flits/?sort=date%20name // /apiv1/flits?sort=-date%20name
     const following = req.query.following;
     const filtro = {};
     // if(date){
@@ -95,7 +95,7 @@ router.get('/', async (req, res, next) => {
       filtro.author = req.query.exactAuthor;
 
     }
-    if (author) {// /apiv1/flits?author=Karen,Steff
+    if (author) {// /apiv1/flits/?author=Karen,Steff
       if (author.includes(',')) {
         console.log('includes ,')
         let authorFilter = [];
@@ -110,15 +110,10 @@ router.get('/', async (req, res, next) => {
         });
         console.log(authorFilter);
         filtro.author = { '$or': authorFilter }
-      } else {// 1 tag query /apiv1/flits?author=Karen
+      } else {// 1 tag query /apiv1/flits/?author=Karen
         filtro.author = { '$in': author };
       }
     }
-
-    // if (author) { // /apiv1/flits?author=k
-    //   // search for a flit that it starts with those letters
-    //   filtro.author = new RegExp('^' + req.query.author, "i");;
-    // }
     if (message) { // /apiv1/flits?message=h
       // search for a flit that it starts with those letters
       //filtro.message = new RegExp('^' + req.query.message, "i");
@@ -133,40 +128,6 @@ router.get('/', async (req, res, next) => {
     }
     let currentDate = new Date().toISOString();
     filtro.date = { $lte: currentDate };
-
-    //TODO: maybe
-    //   if (tag) {// /apiv1/ads?tags=lifestyle,work
-    //     if (tag.includes(',')) {
-    //       filtro.tags = { '$all': tag.split(',') }
-    //     } else {// 1 tag query /apiv1/ads?tags=mobile
-    //       filtro.tags = { '$in': tag };
-    //     }
-
-    //   }
-    // /apiv1/flits?kudos=1000
-    // if (kudos) {
-    //     if (kudos.includes('-')) {
-    //         if (kudos.charAt(0) === '-') {// /apiv1/flits?kudos=-50 Search for product less or equal than 50
-    //             const maxKudos = kudos.slice(1);
-    //             filtro.kudos= { '$lte': maxKudos };
-    //             console.log(maxKudos);
-    //         } else if (kudos.slice(-1) === '-') {  // /apiv1/flits?kudos=10- Search for product greater or equal than 10
-    //             const minKudo = kudos.split('-');
-    //             filtro.kudos = { '$gte': (minKudo[0]) };
-    //         } else {
-    //             // /apiv1/flits?price=0-50 Search for product between 0-50 price
-    //             const minMaxArray = kudos.split('-');
-    //             const min = minMaxArray[0];
-    //             const max = minMaxArray[1];
-    //             filtro.kudos = { '$gte': min, '$lte': max };
-    //         }
-
-    //     } else {// /apiv1/flits?kudo=32
-    //         filtro.kudos = kudos;
-    //     }
-    // }
-
-
     const flits = await Flit.lista(filtro, skip, limit, fields, sort);
     res.json(flits);
   } catch (err) {
@@ -177,7 +138,7 @@ router.get('/', async (req, res, next) => {
 //TODO: add to general get all flits and remove this one.
 router.get('/private', async (req, res, next) => {
   // filters
-  // pagination /apiv1/flits?skip=1&limit=1
+  // pagination /apiv1/flits/?skip=1&limit=1
   const date = req.query.date;
   const skip = req.query.skip;
   const limit = req.query.limit;
