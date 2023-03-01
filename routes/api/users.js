@@ -1,13 +1,14 @@
 var express = require('express');
 var router = express.Router();
 const User = require('../../models/User');
+const authMiddleware = require('../../lib/authMiddleware');
 
 /* GET users listing. */
 
 
 // PUT /apiv1/users/(id) (body=userData)
 // Update a user
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', authMiddleware, async (req, res, next) => {
   try {
 
     const id = req.params.id;
@@ -22,7 +23,7 @@ router.put('/:id', async (req, res, next) => {
     next(err);
   }
 });
-router.put('/follow/id/:id', async (req, res, next) => {
+router.put('/follow/id/:id',authMiddleware, async (req, res, next) => {
   try {
 
     const id = req.params.id;
@@ -43,7 +44,7 @@ router.put('/follow/id/:id', async (req, res, next) => {
     next(err);
   }
 });
-router.put('/unfollow/id/:id', async (req, res, next) => {
+router.put('/unfollow/id/:id',authMiddleware, async (req, res, next) => {
   try {
 
     const id = req.params.id;
@@ -118,7 +119,7 @@ router.get('/:id', async (req, res, next) => {
 
 // DELETE /apiv1/users/:id
 // Delete a user
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', authMiddleware, async (req, res, next) => {
   try {
 
     const id = req.params.id;
