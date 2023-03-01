@@ -5,26 +5,27 @@ const createError = require('http-errors');
 const User = require('../../models/User');
 const jwt = require('jsonwebtoken');
 const app = require('../../app');
+const nodemailer = require('nodemailer');
 
 const router = express.Router();
 //handle errors
 const handleErrors = (err) => {
     console.log(err.message, err.code);
-    let errors = { email: '', password: '', username: ''}
+    let errors = { email: '', password: '', username: '' }
 
     //incorrect email
-    if(err.message === 'incorrect email'){
+    if (err.message === 'incorrect email') {
         errors.email = 'that email in not registered';
     }
 
     //duplicate error code
     if (err.code === 11000) {
-        if(err.message.includes('username')){
+        if (err.message.includes('username')) {
             errors.username = 'That username is already registered'
-        }else{
-            errors.email= 'That email is already registered'
+        } else {
+            errors.email = 'That email is already registered'
         }
-        
+
         return errors;
     }
 
@@ -39,9 +40,9 @@ const handleErrors = (err) => {
     return errors;
 }
 //create token
-const maxAge = 3*24*60*60;
-const createToken  = (id) =>{
-    return jwt.sign({id}, process.env.JWT_SECRET, { //return a token signed
+const maxAge = 3 * 24 * 60 * 60;
+const createToken = (id) => {
+    return jwt.sign({ id }, process.env.JWT_SECRET, { //return a token signed
         expiresIn: maxAge //valid for this long
     });
 };
@@ -56,13 +57,13 @@ router.post('/signup', async (req, res, next) => {
         // instanciate new ad in the memory
         const user = new User(adData);
         const token = createToken(user._id);
-        res.cookie('jwt',token,{httpOnly:true, maxAge: maxAge*1000}); //returns cookie
+       // res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 }); //returns cookie
 
         // save it in de database
         const savedUser = await user.save();
-
-        res.status(201).json({savedUser, token}); //return token
-        
+        // res.send({ savedUser, token });
+        res.status(201).json({ savedUser, token }); //return token
+   
     } catch (err) {
         const errors = handleErrors(err);
         res.status(400).json({ errors });
@@ -70,30 +71,30 @@ router.post('/signup', async (req, res, next) => {
 });
 //login
 router.post('/login', async (req, res, next) => {
-    const {email, password}= req.body;
+    const { email, password } = req.body;
     try {
-        const user = await User.login(email, password);     
-        if(user!=null) {
+        const user = await User.login(email, password);
+        if (user != null) {
             //create token
             const token = createToken(user._id);
-            res.send({token, user});
-        }else{
+            res.send({ token, user });
+        } else {
             res.status(400).json({ error: 'Credential not valid' });
         }
     } catch (err) {
-        console.log('error with login '+err);    
+        console.log('error with login ' + err);
     }
 });
 router.get('/profile/:id', async (req, res, next) => {
     try {
 
         const id = req.params.id;
-  
+
         // Search for an ad in database
         const user = await User.findById(id);
-  
+
         res.send(user);
-  
+
     } catch (err) {
         next(err);
     }
@@ -101,48 +102,70 @@ router.get('/profile/:id', async (req, res, next) => {
 router.post('/forgot/', async (req, res, next) => {
     try {
 
-        const {email}= req.body;
-  
+        const { email } = req.body;
+
         // Search for an ad in database
-        const user = await User.findOne({email});
-        if(!user){
+        const user = await User.findOne({ email });
+        if (!user) {
             res.send("Email not found");
-        }else{
+        } else {
             //create one time link valid for 15 minutes
-        const secret = process.env.JWT_SECRET+ user.password;
-        const payload = {
-            email: user.email,
-            id: user._id
+            const secret = process.env.JWT_SECRET + user.password;
+            const payload = {
+                email: user.email,
+                id: user._id
+            }
+            const token = jwt.sign(payload, secret, { expiresIn: '15m' });
+            const link = `http://localhost:8080/reset-password/${user._id}/${token}`;
+            console.log(link);
+            //send email with link to reset password
+            var transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'youremail@gmail.com',
+                    pass: 'yourpassword'
+                }
+            });
+
+            var mailOptions = {
+                from: 'youremail@gmail.com',
+                to: user.email,
+                subject: 'Flipper - Reset Password',
+                text: `We have received a request to reset your password. Please click the link if you still want to reset it: ${link}`
+            };
+            try {
+                transporter.sendMail(mailOptions, function (error, info) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log('Email sent: ' + info.response);
+                    }
+                });
+                res.send('Password reset link has been sent to your email');
+            } catch (error) {
+                res.send('Error');
+            }
+           
         }
-        const token = jwt.sign(payload, secret, {expiresIn: '15m' });
-        const link = `http://localhost:8080/reset-password/${user._id}/${token}`;
-        console.log(link);
-        res.send('Password reset link has been sent to your email');
-        }
-       
- 
-  
     } catch (err) {
         next(err);
     }
 });
 router.get('/reset-password/:id/:token', async (req, res, next) => {
-    const{id, token} = req.params;
-    const user = await User.findOne({id});
-    if(id !==user._id){
+    const { id, token } = req.params;
+    const user = await User.findOne({ id });
+    if (id !== user._id) {
         res.send('Invalid id')
     }
     //we have a valid id and a valid user with this id.
-    const secret = process.env.JWT_SECRET+ user.password;
+    const secret = process.env.JWT_SECRET + user.password;
     try {
         const payload = jwt.verify(token, secret);
-        res.send({email: user.email});
+        res.send({ email: user.email });
     } catch (error) {
         console.log(error);
         res.send(error.message);
-        
     }
-
 })
 
 
