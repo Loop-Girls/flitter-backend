@@ -6,7 +6,8 @@ const Flit = require('../../models/Flit');
 const multer = require('../../config/multer');
 const Users = require('../../models/User');
 const router = express.Router();
-const imageRoute = 'http://localhost:3000/images/flits/'
+const imageRoute = 'http://localhost:3000/images/flits/';
+const authMiddleware = require('../../lib/authMiddleware');
 
 
 // CRUD
@@ -136,7 +137,7 @@ router.get('/', async (req, res, next) => {
 });
 
 //TODO: add to general get all flits and remove this one.
-router.get('/private', async (req, res, next) => {
+router.get('/private', authMiddleware, async (req, res, next) => {
   // filters
   // pagination /apiv1/flits/?skip=1&limit=1
   const date = req.query.date;
@@ -148,6 +149,7 @@ router.get('/private', async (req, res, next) => {
   const sort = req.query.sort; // /apiv1/flits?sort=date%20name // /apiv1/flits?sort=-date%20name
 
   const author = req.query.author;
+  const message = req.query.message;
   let filtro = {};
   console.log('includes ,')
   let authorFilter = [];
@@ -201,7 +203,7 @@ module.exports = router;
 
 // DELETE /apiv1/flits/:id
 // Delete a flit //TODO: delete image file from folder
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', authMiddleware, async (req, res, next) => {
   try {
 
     const id = req.params.id;
@@ -222,7 +224,7 @@ router.delete('/:id', async (req, res, next) => {
   }
 });
 
-router.put('/kudos/give/id/:id', async (req, res, next) => {
+router.put('/kudos/give/id/:id', authMiddleware, async (req, res, next) => {
   try {
 
     const id = req.params.id;
@@ -239,7 +241,7 @@ router.put('/kudos/give/id/:id', async (req, res, next) => {
     next(err);
   }
 });
-router.put('/kudos/remove/id/:id', async (req, res, next) => {
+router.put('/kudos/remove/id/:id', authMiddleware, async (req, res, next) => {
   try {
 
     const id = req.params.id;

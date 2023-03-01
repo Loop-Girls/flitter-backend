@@ -17,8 +17,8 @@ const usersSchema = mongoose.Schema({
     lowercase: true,
     validate: [isEmail, 'Please enter a valid email']
   },// validate it is an email: npm install validator ,
-  password: { type: String, required: true, minLength: [6, 'Password must be at least 6 characters length'],},
-  avatar: { type: String},
+  password: { type: String, required: true, minLength: [6, 'Password must be at least 6 characters length'], },
+  avatar: { type: String },
   followers: { type: [String] }, //TODO: change to ref User
   following: { type: [String] },
 
@@ -65,22 +65,56 @@ usersSchema.pre('save', async function (next) {
 
 });
 
+const handleErrors = (err) => {
+  console.log(err.message, err.code);
+  let errors = { email: '', password: '', username: ''}
+
+  //incorrect email
+  if(err.message === 'incorrect email'){
+      errors.email = 'that email in not registered';
+  }
+
+  //duplicate error code
+  if (err.code === 11000) {
+      if(err.message.includes('username')){
+          errors.username = 'That username is already registered'
+      }else{
+          errors.email= 'That email is already registered'
+      }
+      
+      return errors;
+  }
+
+  //validation errors 
+  if (err.message.includes('Users validation failed')) {
+      Object.values(err.errors).forEach(({ properties }) => {
+          errors[properties.path] = properties.message;
+      });
+
+  }
+
+  return errors;
+}
+
 //static method to login user
 usersSchema.statics.login = async function (email, password) {
   //check if user exists in database
   const user = await this.findOne({ email: email });
-  if (user) {
-    //compare password from login with password stored in database that is hashed
-    const auth = bcrypt.compare(password, user.password);
-    if (auth) {
+  if (!user){
+    console.log('not valid email');
+    return null;
+  } else{
+      //compare password from login with password stored in database that is hashed
+    const validPassword = await bcrypt.compare(password, user.password);
+    if (!validPassword){
+      console.log('not valid password');
+      return null;
+    } else{
       return user;
     }
-    return null;
-    throw Error('incorrect password'); //change to credentials
   }
-  throw Error("incorrect email"); //change to credencials
-}
 
+}
 // Create the model
 const Users = mongoose.model('Users', usersSchema);
 

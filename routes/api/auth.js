@@ -7,8 +7,6 @@ const jwt = require('jsonwebtoken');
 const app = require('../../app');
 
 const router = express.Router();
-//TODO: save secret in a safe place
-const JWT_SECRET = 'loop girls secret';
 //handle errors
 const handleErrors = (err) => {
     console.log(err.message, err.code);
@@ -43,7 +41,7 @@ const handleErrors = (err) => {
 //create token
 const maxAge = 3*24*60*60;
 const createToken  = (id) =>{
-    return jwt.sign({id}, JWT_SECRET, { //return a token signed
+    return jwt.sign({id}, process.env.JWT_SECRET, { //return a token signed
         expiresIn: maxAge //valid for this long
     });
 };
@@ -74,15 +72,16 @@ router.post('/signup', async (req, res, next) => {
 router.post('/login', async (req, res, next) => {
     const {email, password}= req.body;
     try {
-        const user = await User.login(email, password);
-        //create token and return it in a cookie
-        const token = createToken(user._id);
-        res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge});
-        res.status(200).json({user, token});
-        
+        const user = await User.login(email, password);     
+        if(user!=null) {
+            //create token
+            const token = createToken(user._id);
+            res.send({token, user});
+        }else{
+            res.status(400).json({ error: 'Credential not valid' });
+        }
     } catch (err) {
-        const errors = handleErrors(err);
-        res.status(400).send('Error');
+        console.log('error with login '+err);    
     }
 });
 router.get('/profile/:id', async (req, res, next) => {
@@ -110,7 +109,7 @@ router.post('/forgot/', async (req, res, next) => {
             res.send("Email not found");
         }else{
             //create one time link valid for 15 minutes
-        const secret = JWT_SECRET + user.password;
+        const secret = process.env.JWT_SECRET+ user.password;
         const payload = {
             email: user.email,
             id: user._id
@@ -134,7 +133,7 @@ router.get('/reset-password/:id/:token', async (req, res, next) => {
         res.send('Invalid id')
     }
     //we have a valid id and a valid user with this id.
-    const secret = JWT_SECRET + user.password;
+    const secret = process.env.JWT_SECRET+ user.password;
     try {
         const payload = jwt.verify(token, secret);
         res.send({email: user.email});

@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 
 const { isAPI } = require('./lib/utils');
 require('./models'); // Connect DB & register models
+require('dotenv').config();
 
 var indexRouter = require('./routes/index');
 var flitsRouter = require('./routes/api/flits'); //TODO: add user, auth routes
@@ -22,7 +23,7 @@ var usersRouter = require('./routes/api/users')
 // next();
 // });
 
-const authMiddleware = require('./lib/authMiddleware');
+// const authMiddleware = require('./lib/authMiddleware');
 const app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
