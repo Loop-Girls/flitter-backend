@@ -23,11 +23,13 @@ Start the application in development with:
 ```sh
 npm run dev
 ```
-Authentification: (disabled)
+Reset password: 
 
 ```sh
-user: admin
-password: 1234
+JWT_SECRET = 'your_secret'
+EMAIL_SERVICE = For example: 'Outlook365'. Avoid Gmail.
+ADMIN_EMAIL = 'youremail@example.com'
+ADMIN_EMAIL_PASSWORD = 'your_email_password'
 ```
 
 ## API Documentation
