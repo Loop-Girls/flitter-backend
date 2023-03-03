@@ -6,7 +6,7 @@ const User = require('../../models/User');
 const jwt = require('jsonwebtoken');
 const app = require('../../app');
 const nodemailer = require('nodemailer');
-
+const bcrypt = require('bcrypt');
 const router = express.Router();
 //handle errors
 const handleErrors = (err) => {
@@ -116,19 +116,20 @@ router.post('/forgot/', async (req, res, next) => {
                 id: user._id
             }
             const token = jwt.sign(payload, secret, { expiresIn: '15m' });
-            const link = `http://localhost:8080/reset-password/${user._id}/${token}`;
+            //TODO: 
+            const link = `http://localhost:8080/#/reset-password/${user._id}&${token}`;
             console.log(link);
             //send email with link to reset password
             var transporter = nodemailer.createTransport({
-                service: 'gmail',
+                service: process.env.EMAIL_SERVICE,
                 auth: {
-                    user: 'youremail@gmail.com',
-                    pass: 'yourpassword'
+                    user: process.env.ADMIN_EMAIL,
+                pass: process.env.ADMIN_EMAIL_PASSWORD
                 }
             });
 
             var mailOptions = {
-                from: 'youremail@gmail.com',
+                from:  process.env.ADMIN_EMAIL,
                 to: user.email,
                 subject: 'Flipper - Reset Password',
                 text: `We have received a request to reset your password. Please click the link if you still want to reset it: ${link}`
@@ -151,21 +152,45 @@ router.post('/forgot/', async (req, res, next) => {
         next(err);
     }
 });
-router.get('/reset-password/:id/:token', async (req, res, next) => {
-    const { id, token } = req.params;
-    const user = await User.findOne({ id });
-    if (id !== user._id) {
-        res.send('Invalid id')
+router.post('/reset-password', async (req, res, next) => {
+    const { userId, token, password } = req.body;
+    
+    //TODO: continue
+    console.log(password);
+    const user = await User.findById(userId);
+    if (user) {
+         //we have a valid id and a valid user with this id.
+        const secret = process.env.JWT_SECRET + user.password;
+        try {
+            const payload = jwt.verify(token, secret);
+            if(payload){
+                const salt = await bcrypt.genSalt();
+                //get hash version of the password
+                const hashPassword = await bcrypt.hash(password, salt);
+                User.updateOne({_id:userId}, 
+                    {password:hashPassword}, function (err, docs) {
+                    if (err){
+                        console.log(err);
+                        res.status(400).json({ error: 'Error updating password' });
+                    }
+                    else{
+                        console.log("Updated Docs : ", docs);
+                        res.send({message: 'Password changed'});
+                    }
+                });
+                
+                
+            }
+        
+        } catch (error) {
+            console.log(error);
+            res.send(error.message);
+        }
+       
+    }else{
+        res.status(400).json({ error: 'User not found' });
     }
-    //we have a valid id and a valid user with this id.
-    const secret = process.env.JWT_SECRET + user.password;
-    try {
-        const payload = jwt.verify(token, secret);
-        res.send({ email: user.email });
-    } catch (error) {
-        console.log(error);
-        res.send(error.message);
-    }
+
 })
 
 
